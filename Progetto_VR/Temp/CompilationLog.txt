@@ -1,24 +1,50 @@
 # Starting compiling UnityEngine.TestRunner.dll
-/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-c935c559cb91a16aab9fd5229e380b4b
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-cdadf9f1efa99fa438b50c14cea52cc7
 # Starting compiling UnityEngine.UI.dll
-/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-056e703c570d6a5b29b7ff87fe010684
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-2962a6d9ba172cb139f2f98569b04e63
 # Starting compiling UnityEditor.TestRunner.dll
-/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-5da49a4bd410f07359dcda4b784520cf
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-e65e67af2ac9132f080d5735349dbd54
 # Starting compiling UnityEditor.UI.dll
-/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-0365302045a394d4d8792579c0f4a197
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-3091bc80430416678ab696b87caa3e01
 # Starting compiling Unity.VSCode.Editor.dll
-/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-9c420b161392f2566a036c66d917f0dc
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-9daa0b04b122cac3d8e3c5cf35604e1f
 # Starting compiling Unity.VisualStudio.Editor.dll
-/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-992997d26a0530130a3111666250420d
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-4dc97c43dacd629629f23947d096495a
 # Starting compiling Unity.Timeline.dll
-/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-1e8a8213208458a11a6d5e4fe20f8140
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-7506dbda9f20122f09a452f18b49ff91
 # Starting compiling Unity.TextMeshPro.dll
-/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-cef330076bca6f0479a2c7a963026295
-# Starting compiling Unity.CollabProxy.Editor.dll
-/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-1a883b03d1105d5c2a1a48eb4910bc6d
-# Starting compiling Unity.Timeline.Editor.dll
-/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-c6d619a7ac651271dbe613c8ec918720
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-800f60f5bd70ac5a8bea8809502b7357
 # Starting compiling Unity.Rider.Editor.dll
-/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-0eee373f24169fee6a8bcb9e6fa78cb2
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-b1a89dd14a2a8d8e9ae22fd38041d95f
+# Starting compiling Unity.Settings.Editor.dll
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-2f1d5c42c4a952907ae7a05aad30a28b
+# Starting compiling Unity.Timeline.Editor.dll
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-c6f1a62b79408b7918ba5b16e3049698
+# Starting compiling Unity.CollabProxy.Editor.dll
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-00fba1b684291dc30bbd0f0f0ed1b533
+# Starting compiling Unity.ProBuilder.Poly2Tri.dll
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-436470d8e06c4fd3b91b9ab431116f0a
 # Starting compiling Unity.TextMeshPro.Editor.dll
-/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-18590a7464f167266a4e50e6a1c32760
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-fd5d7771985a82c8eb8fb0a852e156a9
+# Starting compiling Unity.ProGrids.dll
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-b99f5133d9618daf0bdc1cf2bda67ed9
+# Starting compiling Unity.ProBuilder.KdTree.dll
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-dd182a10a8314fb3981fd7a1fa1fa6cb
+# Starting compiling Unity.ProBuilder.Stl.dll
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-69323d9a56d102231935427c3d5282c2
+# Starting compiling Unity.ProBuilder.Csg.dll
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-35c77dc19918e2e2693e77bc6914c16a
+# Starting compiling Unity.ProGrids.Editor.dll
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-2e48e81030fe6fb58bcd9ef22283dbb6
+# Starting compiling Unity.ProBuilder.AssetIdRemapUtility.dll
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-328016e1b127302ffbc7e63989a30911
+# Starting compiling Unity.ProBuilder.dll
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-99806a70cd13cdeecb125be08ce916e9
+# Starting compiling Unity.ProBuilder.Editor.dll
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-d5fa4b9a66939e6a68250f10e2b15f39
+# Starting compiling Unity.ProBuilder.AddOns.Editor.dll
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-a40873f93c8baf078b4b913fe9dee08c
+# Starting compiling Assembly-CSharp.dll
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-501181be500918e499153007a902edfc
+# Starting compiling Assembly-CSharp-Editor.dll
+/home/pasquale/Scrivania/virtual_reality/2020.2.6f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-d509564ec653626a8a337cccad00322f
