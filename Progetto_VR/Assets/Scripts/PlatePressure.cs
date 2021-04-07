@@ -6,39 +6,56 @@ public class PlatePressure : MonoBehaviour
 {
     private BoxCollider _collider;
     private bool pressure = false;
-    private Renderer _render;
+    private MeshRenderer _render;
+
+    [SerializeField]
     private GameObject door;
+    
     [SerializeField]
     private Material _triggerOn;
+
+    [SerializeField]
+    private Material _triggerOff;
+
     // Start is called before the first frame update
     void Start()
     {
         _collider = GetComponent<BoxCollider>();
-        _render = GetComponent<Renderer>();
-        door = GameObject.Find("door");
+        _render = GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        _render.materials[2] = _triggerOn;
+      
     }
 
-    private void OnTriggerEnter(Collider other)
+
+    //cambiamo il colore alla piattaforma da rosso a verde e chiama lo scritp
+    private void OnTriggerStay(Collider other)
     {
         if (pressure == false)
         {
             pressure = true;
             door.GetComponent<DoorInput>().OpenDoor();
+
+            Material[] materials = _render.materials;
+            materials[2] = _triggerOn;
+            _render.materials = materials;
         }
     }
 
+    //cambiamo il colore alla piattaforma da rosso a verde e chiama lo scritp
     private void OnTriggerExit(Collider other)
     {
         if (pressure == true)
         {
             pressure = false;
             door.GetComponent<DoorInput>().CloseDoor();
+
+            Material[] materials = _render.materials;
+            materials[2] = _triggerOff;
+            _render.materials = materials;
         }
     }
 }
