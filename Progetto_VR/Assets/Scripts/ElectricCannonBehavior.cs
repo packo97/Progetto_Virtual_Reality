@@ -16,28 +16,16 @@ public class ElectricCannonBehavior : MonoBehaviour
 
     void OnParticleCollision(GameObject other)
     {
-        //Debug.Log("asasasa");
-        int numCollisionEvents = part.GetCollisionEvents(other, collisionEvents);
+        PlayerBehavior player = other.GetComponent<PlayerBehavior>();
 
-        Rigidbody rb = other.GetComponent<Rigidbody>();
+        if (player)
+        {
+            player.Hurt();
+        }
 
-// Debug.Log(collisionEvents);
-        int i = 0;
-
-        
-            if (rb)
-            {
-                /*
-                Vector3 pos = collisionEvents[i].intersection;
-                Vector3 force = collisionEvents[i].velocity * 10;               
-                rb.AddForce(force);
-                */
-                other.GetComponent<PlayerBehavior>().Hurt();
-            }
-            i++;
         
     }
-
+    
     // Update is called once per frame
     void Update()
     {

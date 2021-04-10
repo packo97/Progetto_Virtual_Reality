@@ -9,6 +9,7 @@ public class PlayerBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _lives = 5;
         checkpointPosition = GetComponent<Transform>().position; 
     }
 
@@ -21,7 +22,6 @@ public class PlayerBehavior : MonoBehaviour
     public void Hurt()
     {
         _lives-=1;
-        //
         Debug.Log(_lives);
         Debug.Log(checkpointPosition);
         transform.position = new Vector3(checkpointPosition.x, checkpointPosition.y, checkpointPosition.z);
