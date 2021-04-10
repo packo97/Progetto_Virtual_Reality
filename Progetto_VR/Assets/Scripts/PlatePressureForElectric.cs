@@ -5,10 +5,17 @@ using UnityEngine;
 
 public class PlatePressureForElectric : MonoBehaviour
 {
-    [SerializeField] private GameObject electric_cannon1;
-    [SerializeField] private GameObject electric_cannon2;
-    [SerializeField] private GameObject electric_cannon3;
-    [SerializeField] private GameObject electric_cannon4;
+    [SerializeField] 
+    private GameObject electric_cannon1;
+    
+    [SerializeField] 
+    private GameObject electric_cannon2;
+    [SerializeField] 
+    private GameObject electric_cannon3;
+    
+    [SerializeField] 
+    private GameObject electric_cannon4;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -20,10 +27,15 @@ public class PlatePressureForElectric : MonoBehaviour
     {
         
     }
-
-
+    
     private void OnTriggerEnter(Collider other)
     {
+        /*
+         * Se sono su una pedana -> effettua lo switch dei corrispondenti Electric Cannon Gate
+         * 
+         */
+        
+        
         if(electric_cannon1)
             electric_cannon1.GetComponent<ElectricCannonBehavior>().ElectricSwitch();
         if(electric_cannon2)

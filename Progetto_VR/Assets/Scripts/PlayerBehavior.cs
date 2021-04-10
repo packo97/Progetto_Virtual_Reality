@@ -21,10 +21,7 @@ public class PlayerBehavior : MonoBehaviour
 
     public void Hurt()
     {
-        _lives-=1;
-        Debug.Log(_lives);
-        Debug.Log(checkpointPosition);
-        //transform.position = new Vector3(checkpointPosition.x, checkpointPosition.y, checkpointPosition.z);
+        _lives -=1 ;
         transform.position = new Vector3(checkpointPosition.x, checkpointPosition.y, checkpointPosition.z);
     }
 }

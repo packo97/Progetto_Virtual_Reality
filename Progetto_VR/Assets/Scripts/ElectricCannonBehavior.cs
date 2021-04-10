@@ -12,18 +12,6 @@ public class ElectricCannonBehavior : MonoBehaviour
  
     }
 
-    void OnParticleCollision(GameObject other)
-    {
-        /*PlayerBehavior player = other.GetComponentInParent<PlayerBehavior>();
-
-        if (player)
-        {
-            player.Hurt();
-        }
-        */
-        
-    }
-    
     // Update is called once per frame
     void Update()
     {
@@ -32,28 +20,31 @@ public class ElectricCannonBehavior : MonoBehaviour
 
     public void ElectricSwitch()
     {
-   
-            Transform[] list = GetComponentsInChildren<Transform>(true);
-            for (int i = 0; i < list.Length; i++)
+        /*
+         * 1 - Prendo tutti i figli dell'oggetto electric cannon gate
+         * 2 - Controllo se possiedono il componente Particle System
+         * 3 - Gli oggetti che lo hanno se sono attivi vengono disattivati e viceversa
+         * 
+         */
+        
+        Transform[] list = GetComponentsInChildren<Transform>(true);
+        for (int i = 0; i < list.Length; i++)
+        {
+            if (list[i].GetComponent<ParticleSystem>())
             {
-                
-                if (list[i].GetComponent<ParticleSystem>())
+                bool value = list[i].gameObject.activeSelf;
+                //domanda per il prof
+                if (value == true)
                 {
-                    bool value = list[i].gameObject.activeSelf;
-                    //domanda per il prof
-                    if (value == true)
-                    {
-                        list[i].gameObject.SetActive(false);
-                        
-                    }
-                    else
-                    {
-                        list[i].gameObject.SetActive(true);
-                    }
+                    list[i].gameObject.SetActive(false);
+                    
                 }
-                Debug.Log(list[i].name + list[i].gameObject.activeSelf);
+                else
+                {
+                    list[i].gameObject.SetActive(true);
+                }
             }
-
+        }
     }
     
     

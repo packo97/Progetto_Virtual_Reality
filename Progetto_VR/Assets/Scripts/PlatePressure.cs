@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlatePressure : MonoBehaviour
 {
-    private BoxCollider _collider;
     private bool pressure = false;
     private MeshRenderer _render;
 
@@ -20,7 +19,6 @@ public class PlatePressure : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _collider = GetComponent<BoxCollider>();
         _render = GetComponent<MeshRenderer>();
     }
 
