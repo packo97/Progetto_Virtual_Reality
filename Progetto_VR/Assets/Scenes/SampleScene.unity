@@ -34872,7 +34872,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 10
   _gravity: 9.81
-  _jumpSpeed: 1
+  _jumpSpeed: 2
   _doubleJumpMultiplier: 0.5
 --- !u!143 &2096244894
 CharacterController:

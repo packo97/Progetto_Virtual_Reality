@@ -24,6 +24,7 @@ public class PlayerBehavior : MonoBehaviour
         _lives-=1;
         Debug.Log(_lives);
         Debug.Log(checkpointPosition);
+        //transform.position = new Vector3(checkpointPosition.x, checkpointPosition.y, checkpointPosition.z);
         transform.position = new Vector3(checkpointPosition.x, checkpointPosition.y, checkpointPosition.z);
     }
 }

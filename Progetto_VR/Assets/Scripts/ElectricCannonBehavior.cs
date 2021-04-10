@@ -5,18 +5,16 @@ using UnityEngine;
 public class ElectricCannonBehavior : MonoBehaviour
 {
     // Start is called before the first frame update
-    public ParticleSystem part;
-    public List<ParticleCollisionEvent> collisionEvents;
-    
+
+
     void Start()
     {
-        part = GetComponent<ParticleSystem>();
-        collisionEvents = new List<ParticleCollisionEvent>();
+ 
     }
 
     void OnParticleCollision(GameObject other)
     {
-        PlayerBehavior player = other.GetComponent<PlayerBehavior>();
+        PlayerBehavior player = other.GetComponentInParent<PlayerBehavior>();
 
         if (player)
         {
