@@ -15,7 +15,6 @@ public class PlayerRespawn : MonoBehaviour
             respawn=other.GetComponent<Transform>().position;
 
         }
-        Debug.Log(respawn);
     }
 
     public Vector3 GetRespawn()
