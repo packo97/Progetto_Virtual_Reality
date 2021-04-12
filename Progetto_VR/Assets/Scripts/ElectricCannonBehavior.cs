@@ -34,7 +34,8 @@ public class ElectricCannonBehavior : MonoBehaviour
             {
                 bool value = list[i].gameObject.activeSelf;
                 //domanda per il prof
-                if (value == true)
+                list[i].gameObject.SetActive(!value);
+                /*if (value == true)
                 {
                     list[i].gameObject.SetActive(false);
                     
@@ -42,7 +43,7 @@ public class ElectricCannonBehavior : MonoBehaviour
                 else
                 {
                     list[i].gameObject.SetActive(true);
-                }
+                }*/
             }
         }
     }

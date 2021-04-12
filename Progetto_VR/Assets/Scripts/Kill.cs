@@ -26,9 +26,9 @@ public class Kill : MonoBehaviour
             /* player.SetActive(false);
              player.transform.position = respawn.transform.position;
              player.SetActive(true);*/
-            other.SetActive(false);
+            //other.SetActive(false);
             other.transform.position = other.GetComponent<PlayerRespawn>().GetRespawn();
-            other.SetActive(true);
+            //other.SetActive(true);
         }
         
     }
