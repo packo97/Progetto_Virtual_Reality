@@ -25,7 +25,16 @@ public class PlatePressure : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+        if (pressure == true && transform.localScale.y>0.125)
+        {
+            //abbasare la pedana
+            transform.localScale += (new Vector3(0, -0.1f, 0) * (Time.deltaTime * 4));
+        }
+        else if(pressure == false && transform.localScale.y < 0.25)
+        {
+            //alzare la pendana
+            transform.localScale += (new Vector3(0, 0.1f, 0) * (Time.deltaTime * 4));
+        }
     }
 
 
