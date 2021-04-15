@@ -4,18 +4,13 @@ using UnityEngine;
 
 public class Kill : MonoBehaviour
 {
-    /*[SerializeField] private GameObject player;*/
-
-   /* [SerializeField] 
-    private Transform respawn;*/
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("Player"))
         {
-            /*player.SetActive(false);
-            player.transform.position = respawn.transform.position;
-            player.SetActive(true);*/
+            other.gameObject.SetActive(false);
+            other.gameObject.transform.position = other.gameObject.GetComponent<PlayerRespawn>().GetRespawn();
+            other.gameObject.SetActive(true);
         }
     }
 
@@ -23,9 +18,6 @@ public class Kill : MonoBehaviour
     {
         if (other.tag.Equals("Player"))
         {
-            /* player.SetActive(false);
-             player.transform.position = respawn.transform.position;
-             player.SetActive(true);*/
             other.SetActive(false);
             other.transform.position = other.GetComponent<PlayerRespawn>().GetRespawn();
             other.SetActive(true);
