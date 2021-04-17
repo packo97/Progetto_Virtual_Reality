@@ -119,7 +119,7 @@ namespace Invector.vCharacterController
 
             // prevents the collider from slipping on ramps
             maxFrictionPhysics = new PhysicMaterial();
-            maxFrictionPhysics.name = "maxFrictionPhysics";
+            maxFrictionPhysics.name =  "maxFrictionPhysics";
             maxFrictionPhysics.staticFriction = 1f;
             maxFrictionPhysics.dynamicFriction = 1f;
             maxFrictionPhysics.frictionCombine = PhysicMaterialCombine.Maximum;
@@ -234,7 +234,10 @@ namespace Invector.vCharacterController
         #endregion
 
         #region Jump Methods
-
+        public bool getJump()
+        {
+            return isJumping;
+        }
         protected virtual void ControlJumpBehaviour()
         {
             if (!isJumping) return;
