@@ -26,6 +26,8 @@ public class Transfomation : MonoBehaviour
     //tasto per la trasformazione
     public KeyCode transformInput=KeyCode.Tab;
 
+    private ElectricBehavior _electricBehavior;
+    
     Rigidbody body;
     void Start()
     {
@@ -35,6 +37,8 @@ public class Transfomation : MonoBehaviour
         defaultMAT = list[0].materials;
         particelle = GetComponentInChildren<ParticleSystem>();
         defColor = particelle.startColor;
+
+        _electricBehavior = GetComponentInChildren<ElectricBehavior>(true);
     }
 
     // Update is called once per frame
@@ -55,6 +59,7 @@ public class Transfomation : MonoBehaviour
             }
             ChangeMaterial();
             particelle.Play();
+            _electricBehavior.Reset();
         }
         
 
@@ -65,10 +70,10 @@ public class Transfomation : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         /*
-         Se la trasformazione attiva è di gomma e il player non è attaccato al terreno calcolo la 
+         Se la trasformazione attiva ï¿½ di gomma e il player non ï¿½ attaccato al terreno calcolo la 
         distanza tra il punto di stacco e di collisione che ne determina la forza con cui 
         il player rimbalza (sopra un certo limite la forza di rimbalzo viene bloccata ad 
-        un determinato gap). finche la distanza di rimbalzo non sarà trascurabile il player continuarà 
+        un determinato gap). finche la distanza di rimbalzo non sarï¿½ trascurabile il player continuarï¿½ 
         a rimbalzare ma con forza minore.
 
          */
@@ -97,7 +102,7 @@ public class Transfomation : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         /*
-         *  Se la trasformazione attiva è di gomma e il player si stacca da una piattaforma
+         *  Se la trasformazione attiva ï¿½ di gomma e il player si stacca da una piattaforma
          *  o terreno viene salvato il punto di stacco e la booleana di stacco viene settata a true.
          * */
         if (isGrounded && transf==Tranformation.Gomma)

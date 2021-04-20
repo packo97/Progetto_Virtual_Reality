@@ -30,20 +30,19 @@ public class InteractionWithObject : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-
-
-            if (isTaken)
+            Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 2);
+            
+            foreach (Collider hitCollider in hitColliders)
             {
-                interactable_object.transform.position = transform.TransformPoint(0, 1, 1);
-                interactable_object.SetActive(true);
-                isTaken = false;
-            }
-            else
-            {
-                Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 2);
-                foreach (Collider hitCollider in hitColliders)
+                if (isTaken)
                 {
-                    Debug.Log(hitCollider.name);
+                    interactable_object.transform.position = transform.TransformPoint(0, 1, 1);
+                    interactable_object.SetActive(true);
+                    isTaken = false;
+                }
+                else
+                {
+                    //Debug.Log(hitCollider.name);
                     if (hitCollider.gameObject.GetComponent<Interactable>() != null)
                     {
                         interactable_object = hitCollider.gameObject;
@@ -63,52 +62,36 @@ public class InteractionWithObject : MonoBehaviour
 
                     }
                 }
-            }
-
-
-            if (transformation.transf == Transfomation.Tranformation.Rame) { 
                 
-                Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 2);
-                foreach (Collider hitCollider in hitColliders)
+                if (transformation.transf == Transfomation.Tranformation.Rame) 
                 {
                     // se interagiamo con un electrical
                     if (hitCollider.gameObject.GetComponent<Electrical>() != null)
                     {
-                        Transform[] childrenOfElectrical = hitCollider.gameObject.GetComponentsInChildren<Transform>(true);
-                        bool isElectricalActive=false;
+                        ElectricBehavior electricity = hitCollider.gameObject.GetComponentInChildren<ElectricBehavior>(true);
                         //vediamo se l'electrical è attivo
-                        for (int i = 0; i < childrenOfElectrical.Length; i++)
-                            if (childrenOfElectrical[i].GetComponent<ParticleSystem>() != null)
-                                isElectricalActive = childrenOfElectrical[i].gameObject.activeSelf;
-
-                        Transform[] children = GetComponentsInChildren<Transform>(true);
+                        bool isElectricalActive = electricity.gameObject.activeSelf;
+                        
+                        ElectricBehavior electricityOnPlayer = GetComponentInChildren<ElectricBehavior>(true);
+                        //se interagiamo con l'electrical active ci attiviamo le nostre particelle
                         if (isElectricalActive)
                         {
                             Debug.Log("electrical acceso");
-                            
-                            //se interagiamo con l'electrical active ci attiviamo le nostre particelle
-                            for (int i = 0; i < children.Length; i++)
-                                if (children[i].GetComponent<ParticleSystem>())
-                                    children[i].gameObject.SetActive(true);
+                            electricityOnPlayer.ElectricSwitch();
+                            Debug.Log(electricityOnPlayer.gameObject.activeSelf);
                         }
-                        else //se interagiamo con l'electrical spento ma noi siamo carichi lo attiviamo
+                        else //se interagiamo con l'electrical spento ma noi siamo carichi lo attiviamo e noi perdiamo la carica
                         {
                             Debug.Log("electrical spento");
-                            bool value = false;
                             //vediamo se noi siamo carichi
-                            for (int i = 0; i < children.Length; i++)
-                                if (children[i].GetComponent<ParticleSystem>())
-                                    value = children[i].gameObject.activeSelf;
-
-                            if (value)
+                            bool isElectricityActiveOnPlayer = electricityOnPlayer.gameObject.activeSelf;
+                            if (isElectricityActiveOnPlayer)
                             {
-                                for (int i = 0; i < childrenOfElectrical.Length; i++)
-                                    if (childrenOfElectrical[i].GetComponent<ParticleSystem>())
-                                        childrenOfElectrical[i].gameObject.SetActive(true);
+                                electricity.ElectricSwitch();
+                                electricityOnPlayer.ElectricSwitch();
                             }
                         }
-                    } 
-
+                    }
                 }
             }
         }

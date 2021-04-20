@@ -37,12 +37,12 @@ public class PlatePressureForElectric : MonoBehaviour
         
         
         if(electric_cannon1)
-            electric_cannon1.GetComponent<ElectricCannonBehavior>().ElectricSwitch();
+            electric_cannon1.GetComponent<ElectricBehavior>().ElectricSwitch();
         if(electric_cannon2)
-            electric_cannon2.GetComponent<ElectricCannonBehavior>().ElectricSwitch();
+            electric_cannon2.GetComponent<ElectricBehavior>().ElectricSwitch();
         if(electric_cannon3)
-            electric_cannon3.GetComponent<ElectricCannonBehavior>().ElectricSwitch();
+            electric_cannon3.GetComponent<ElectricBehavior>().ElectricSwitch();
         if(electric_cannon4)
-            electric_cannon4.GetComponent<ElectricCannonBehavior>().ElectricSwitch();
+            electric_cannon4.GetComponent<ElectricBehavior>().ElectricSwitch();
     }
 }
