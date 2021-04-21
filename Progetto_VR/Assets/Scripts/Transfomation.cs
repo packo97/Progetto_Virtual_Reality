@@ -12,6 +12,7 @@ public class Transfomation : MonoBehaviour
     [SerializeField] private Material Ghiaccio;
     [SerializeField] private Material Gomma;
     [SerializeField] private Material Colla;
+    [SerializeField] private int jumpLimit;
     private SkinnedMeshRenderer[] list;
     private Material[] defaultMAT;
 
@@ -87,8 +88,8 @@ public class Transfomation : MonoBehaviour
            
             Vector3 vec = new Vector3(0, 250 * distance, 0);
            
-            if (distance * 250 > 1200)
-                vec.y = 1200;
+            if (distance * 250 > jumpLimit)
+                vec.y = jumpLimit;
 
             body.AddForce(vec , ForceMode.Impulse);
             jumpPoint /=2;
