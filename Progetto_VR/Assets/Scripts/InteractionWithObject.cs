@@ -25,9 +25,7 @@ public class InteractionWithObject : MonoBehaviour
          * Se l'oggetto non è stato preso, collide con la sfera di raggio 2 ed è davanti al player allora posso prendere l'oggetto.
          *  
          */
-
-
-
+        
         if (Input.GetKeyDown(KeyCode.E))
         {
             Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 2);
@@ -63,7 +61,7 @@ public class InteractionWithObject : MonoBehaviour
                     }
                 }
                 
-                if (transformation.transf == Transfomation.Tranformation.Rame) 
+                if (transformation.transf == Transfomation.Transformation.Rame) 
                 {
                     // se interagiamo con un electrical
                     if (hitCollider.gameObject.GetComponent<Electrical>() != null)
