@@ -3471,3 +3471,163 @@ System memory in use after: 72,1 MB.
 Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 2330.
 Total: 5,717146 ms (FindLiveObjects: 0,372758 ms CreateObjectMapping: 0,104120 ms MarkObjects: 5,063718 ms  DeleteObjects: 0,173704 ms)
 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0,005926 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for LinuxStandalone target not found
+Refreshing native plugins compatible for Editor in 0,70 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0,00 ms.
+Warning: Annotation not found!
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/buildslave/unity/build/Runtime/Export/Scripting/StackTrace.cs:37)
+UnityEditor.ProBuilder.EditorUtility:SetGizmoIconEnabled (System.Type,bool)
+UnityEditor.ProBuilder.HierarchyListener:.cctor ()
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[]) (at /home/bokken/buildslave/unity/build/Editor/Mono/EditorAssemblies.cs:114)
+
+[/home/bokken/buildslave/unity/build/Runtime/Export/Scripting/StackTrace.cs line 37]
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  2,412 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0,93 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0,00 ms.
+Unloading 1556 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 72,1 MB.
+System memory in use after: 72,1 MB.
+
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 2334.
+Total: 5,224732 ms (FindLiveObjects: 0,429814 ms CreateObjectMapping: 0,122900 ms MarkObjects: 4,558463 ms  DeleteObjects: 0,111397 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 3720,176748 seconds.
+  path: Assets/Scripts/Climbing.cs
+  artifactKey: Guid(6e05dc78af02a642abcf7316aee7abdb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Climbing.cs using Guid(6e05dc78af02a642abcf7316aee7abdb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '52626407a0b1b575ec04f24fe05c4166') in 0,004861 seconds
+  Import took 0,009432 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1033,371632 seconds.
+  path: Assets/AssetStoreOriginals/_SNAPS_PrototypingAssets/SciFi_Industrial/Prefabs/NestedPrefabs/Deck_Floor_01_3X3.prefab
+  artifactKey: Guid(4c774ccb36270434caf72b6a59424109) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetStoreOriginals/_SNAPS_PrototypingAssets/SciFi_Industrial/Prefabs/NestedPrefabs/Deck_Floor_01_3X3.prefab using Guid(4c774ccb36270434caf72b6a59424109) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c07958b6b0f943d19ada2dcd50c94ba4') in 0,179702 seconds
+  Import took 0,198991 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0,000085 seconds.
+  path: Assets/AssetStoreOriginals/_SNAPS_PrototypingAssets/SciFi_Industrial/Prefabs/NestedPrefabs/Doorway_Balcony_3X1.prefab
+  artifactKey: Guid(f0075f9ff8684d2498269202fd7753ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetStoreOriginals/_SNAPS_PrototypingAssets/SciFi_Industrial/Prefabs/NestedPrefabs/Doorway_Balcony_3X1.prefab using Guid(f0075f9ff8684d2498269202fd7753ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '113ee8262e76cb2c1a7314af05dc9357') in 0,072855 seconds
+  Import took 0,084109 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0,000245 seconds.
+  path: Assets/AssetStoreOriginals/_SNAPS_PrototypingAssets/SciFi_Industrial/Prefabs/NestedPrefabs/Deck_Wall_3X1.prefab
+  artifactKey: Guid(589f6cb4dfbeb4b49a340d9c25d63c17) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetStoreOriginals/_SNAPS_PrototypingAssets/SciFi_Industrial/Prefabs/NestedPrefabs/Deck_Wall_3X1.prefab using Guid(589f6cb4dfbeb4b49a340d9c25d63c17) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6fc098361c3b318be08d5ce64535cf65') in 0,033757 seconds
+  Import took 0,038892 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0,000263 seconds.
+  path: Assets/AssetStoreOriginals/_SNAPS_PrototypingAssets/SciFi_Industrial/Prefabs/NestedPrefabs/Supports.prefab
+  artifactKey: Guid(d79e9a4b5e5e8e3479f244f390a66b57) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetStoreOriginals/_SNAPS_PrototypingAssets/SciFi_Industrial/Prefabs/NestedPrefabs/Supports.prefab using Guid(d79e9a4b5e5e8e3479f244f390a66b57) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '50f8be7f03edc7dc9a3b7fd300ab0153') in 0,035460 seconds
+  Import took 0,040729 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0,000382 seconds.
+  path: Assets/AssetStoreOriginals/_SNAPS_PrototypingAssets/SciFi_Industrial/Prefabs/NestedPrefabs/Wall_Balcony_3X1.prefab
+  artifactKey: Guid(6162963469b806c479d6799947b9be2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetStoreOriginals/_SNAPS_PrototypingAssets/SciFi_Industrial/Prefabs/NestedPrefabs/Wall_Balcony_3X1.prefab using Guid(6162963469b806c479d6799947b9be2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '02e14ae9fafaac20c9e107c11657db6f') in 0,028144 seconds
+  Import took 0,033840 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0,001989 seconds.
+  path: Assets/AssetStoreOriginals/_SNAPS_PrototypingAssets/SciFi_Industrial/Prefabs/NestedPrefabs/Stairway_Balcony_3X1.prefab
+  artifactKey: Guid(a24a1ab7f3b926a47b003a6260ffd84d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetStoreOriginals/_SNAPS_PrototypingAssets/SciFi_Industrial/Prefabs/NestedPrefabs/Stairway_Balcony_3X1.prefab using Guid(a24a1ab7f3b926a47b003a6260ffd84d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '15966e43239517ff8c1d966804d34960') in 0,050639 seconds
+  Import took 0,055628 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0,000179 seconds.
+  path: Assets/AssetStoreOriginals/_SNAPS_PrototypingAssets/SciFi_Industrial/Prefabs/NestedPrefabs/PowerSpot.prefab
+  artifactKey: Guid(537a5e593a1df744285a671e7570742c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetStoreOriginals/_SNAPS_PrototypingAssets/SciFi_Industrial/Prefabs/NestedPrefabs/PowerSpot.prefab using Guid(537a5e593a1df744285a671e7570742c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b2b87c1448fa1ba7c52c140e719ddb3f') in 0,063749 seconds
+  Import took 0,068842 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0,001751 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for LinuxStandalone target not found
+Refreshing native plugins compatible for Editor in 0,46 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0,00 ms.
+Warning: Annotation not found!
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/buildslave/unity/build/Runtime/Export/Scripting/StackTrace.cs:37)
+UnityEditor.ProBuilder.EditorUtility:SetGizmoIconEnabled (System.Type,bool)
+UnityEditor.ProBuilder.HierarchyListener:.cctor ()
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[]) (at /home/bokken/buildslave/unity/build/Editor/Mono/EditorAssemblies.cs:114)
+
+[/home/bokken/buildslave/unity/build/Runtime/Export/Scripting/StackTrace.cs line 37]
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1,271 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0,46 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0,00 ms.
+Unloading 1556 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 72,2 MB.
+System memory in use after: 72,2 MB.
+
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 2338.
+Total: 4,087604 ms (FindLiveObjects: 0,365377 ms CreateObjectMapping: 0,096243 ms MarkObjects: 3,485502 ms  DeleteObjects: 0,138842 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0,001663 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for LinuxStandalone target not found
+Refreshing native plugins compatible for Editor in 0,44 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0,00 ms.
+Warning: Annotation not found!
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /home/bokken/buildslave/unity/build/Runtime/Export/Scripting/StackTrace.cs:37)
+UnityEditor.ProBuilder.EditorUtility:SetGizmoIconEnabled (System.Type,bool)
+UnityEditor.ProBuilder.HierarchyListener:.cctor ()
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[]) (at /home/bokken/buildslave/unity/build/Editor/Mono/EditorAssemblies.cs:114)
+
+[/home/bokken/buildslave/unity/build/Runtime/Export/Scripting/StackTrace.cs line 37]
+
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1,246 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0,65 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0,00 ms.
+Unloading 1556 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 72,2 MB.
+System memory in use after: 72,2 MB.
+
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 2341.
+Total: 6,236950 ms (FindLiveObjects: 0,660023 ms CreateObjectMapping: 0,120788 ms MarkObjects: 5,315200 ms  DeleteObjects: 0,138869 ms)
+
