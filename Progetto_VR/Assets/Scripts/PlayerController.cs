@@ -88,20 +88,11 @@ public class PlayerController : MonoBehaviour
         
         //Debug.Log(Physics.Raycast(transform.position, -Vector3.up, 1f));
         float colliderHeight = _capsuleCollider.height;
-        Ray ray2 = new Ray(transform.position + new Vector3(0, colliderHeight / 2, 0), Vector3.down);
+        Ray ray = new Ray(transform.position + new Vector3(0, colliderHeight / 2, 0), Vector3.down);
         //Debug.Log(Physics.Raycast(ray2, out groundHit, (colliderHeight / 2) + 0.2f));
-        return Physics.Raycast(ray2, out groundHit, (colliderHeight / 2) + 0.2f);
+        return Physics.Raycast(ray, out groundHit, (colliderHeight / 2) + 0.2f);
     }
-    private void Hurt()
-    {
-        /*
-         * Diminuisce la vita di 1
-         * 
-         */
-        
-        _lives -= 1;
-        Debug.Log("Life " + _lives);
-    }
+
 
     protected virtual void ControlMaterialPhysics()
     {
@@ -121,14 +112,22 @@ public class PlayerController : MonoBehaviour
         return groundAngle;
     }
     
-    
+    public void Hurt()
+    {
+        /*
+         * Diminuisce la vita di 1
+         * 
+         */
+        
+        _lives -= 1;
+        Debug.Log("Life " + _lives);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         /*
          * 1 - Se collide con un oggetto che è taggato con "Respawn" -> Imposta la respawn postion
-         * 2 - Se collide con un oggetto che è taggato con "Die" -> Imposta la posizione attuale alla respawn position
-         *     e diminuisci la vita di 1.
+         *
          */
         
         if (other.tag.Equals("Respawn"))
@@ -136,24 +135,11 @@ public class PlayerController : MonoBehaviour
             respawnPosition = other.GetComponent<Transform>().position;
             Debug.Log("Respawn position " + respawnPosition);
         }
-        else if (other.tag.Equals("Die"))
-        {
-            transform.position = respawnPosition;
-            Hurt();
-        }
     }
 
-    private void OnParticleCollision(GameObject other)
+    public Vector3 getRespawnPosition()
     {
-        /*
-         * 1 - Se collide con particelle che sono taggate cond "Die" -> cambia la posizione attuale nella respawn position
-         *     e diminuisci la vita di 1.
-         */
-        
-        if (other.tag.Equals("Die"))
-        {
-            transform.position = respawnPosition;
-            Hurt();
-        }
+        return respawnPosition;
     }
+    
 }

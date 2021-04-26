@@ -29,7 +29,9 @@ public class Transfomation : MonoBehaviour
     
     private float _jumpPoint, _collisionPoint, _distance, _jumpLimit;
 
-   
+    [SerializeField] private GameObject icePlanePrefab;
+    private RaycastHit iceHit;
+    
     void Start()
     {
         transf = Transformation.Default;
@@ -125,8 +127,19 @@ public class Transfomation : MonoBehaviour
             _distance = 0;
         }
 
+        if (transf == Transformation.Ghiaccio && collision.gameObject.tag.Equals("Water"))
+        {
+            /*
+             * Se sono di ghiaccio e tocco l'acqua, istanzio un plabe di ghiaccio sotto i piedi del player
+             * e faccio partire una coroutine che gestisce il tempo di vita del ghiaccio
+             */
+            GameObject _icePlane = Instantiate(icePlanePrefab) as GameObject;
+            _icePlane.transform.position = transform.position;
+            
+            StartCoroutine(_icePlane.GetComponent<IcePlane>().IceTime());
+                
+        }
     }
-
 
     private void OnCollisionStay(Collision other)
     {
@@ -140,6 +153,9 @@ public class Transfomation : MonoBehaviour
             
         }
         */
+  
+
+
     }
 
     private void OnCollisionExit(Collision collision)
