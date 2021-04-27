@@ -28,10 +28,13 @@ public class Transfomation : MonoBehaviour
     private Rigidbody _rigidbody;
     
     private float _jumpPoint, _collisionPoint, _distance, _jumpLimit;
-
+    [SerializeField] private float _iceBreakLimit;
+    
     [SerializeField] private GameObject icePlanePrefab;
     private RaycastHit iceHit;
-    
+
+    public bool isClimbing;
+
     void Start()
     {
         transf = Transformation.Default;
@@ -44,6 +47,9 @@ public class Transfomation : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _jumpLimit = 750f;
         _isGrounded = true;
+        
+        isClimbing = false;
+        
     }
 
     // Update is called once per frame
@@ -55,8 +61,19 @@ public class Transfomation : MonoBehaviour
             ChangeMaterial();
             particelle.Play();
             _electricBehavior.Reset();
+            
         }
+
+        if (transform.position.y > _jumpPoint)
+            _jumpPoint = transform.position.y;
         
+        if (isClimbing)
+        {
+            
+            Vector3 direction = Input.GetAxis("Horizontal") * transform.right +  Input.GetAxis("Vertical") * transform.up;
+            Debug.Log(direction);
+            _rigidbody.MovePosition(transform.position + direction * Time.deltaTime * 10);
+        }
 
     }
     
@@ -127,18 +144,42 @@ public class Transfomation : MonoBehaviour
             _distance = 0;
         }
 
-        if (transf == Transformation.Ghiaccio && collision.gameObject.tag.Equals("Water"))
+        if (transf == Transformation.Ghiaccio)
         {
-            /*
-             * Se sono di ghiaccio e tocco l'acqua, istanzio un plabe di ghiaccio sotto i piedi del player
-             * e faccio partire una coroutine che gestisce il tempo di vita del ghiaccio
-             */
-            GameObject _icePlane = Instantiate(icePlanePrefab) as GameObject;
-            _icePlane.transform.position = transform.position;
+            if (collision.gameObject.tag.Equals("Water"))
+            {
+                /*
+                * Se sono di ghiaccio e tocco l'acqua, istanzio un plabe di ghiaccio sotto i piedi del player
+                * e faccio partire una coroutine che gestisce il tempo di vita del ghiaccio
+                */
+                GameObject _icePlane = Instantiate(icePlanePrefab) as GameObject;
+                _icePlane.transform.position = transform.position;
             
-            StartCoroutine(_icePlane.GetComponent<IcePlane>().IceTime());
+                StartCoroutine(_icePlane.GetComponent<IcePlane>().IceTime());
+            }
+            else
+            {
+                _collisionPoint = transform.position.y;
+                _distance = _jumpPoint - _collisionPoint;
+                
+                if (_distance >= _iceBreakLimit)
+                {
+                    PlayerController playerController = GetComponent<PlayerController>();
+                    transform.position = playerController.getRespawnPosition();
+                    playerController.Hurt();
+                }
+                _jumpPoint = _collisionPoint;
+            }
                 
         }
+        
+
+        if (transf == Transformation.Colla && collision.gameObject.tag.Equals("Climbing"))
+        {
+            isClimbing = true;
+            _rigidbody.isKinematic = true;
+        }
+        
     }
 
     private void OnCollisionStay(Collision other)
@@ -166,11 +207,17 @@ public class Transfomation : MonoBehaviour
          *
          */
 
-        if (_isGrounded && transf == Transformation.Gomma)
+        if ( _isGrounded && (transf == Transformation.Gomma || transf == Transformation.Ghiaccio))
         {
             _jumpPoint = transform.position.y;
             _isGrounded = false;
             //Debug.Log(_jumpPoint);
+        }
+
+        if (transf == Transformation.Colla && isClimbing)
+        {
+            isClimbing = false;
+            _rigidbody.isKinematic = false;
         }
 
     }
