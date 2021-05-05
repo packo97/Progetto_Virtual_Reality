@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +11,9 @@ public class PlayerController : MonoBehaviour
     
     private Rigidbody rigidbody;
     private CapsuleCollider _capsuleCollider;
-
+    
     private int _lives;
+    
     private Vector3 respawnPosition;
 
 
@@ -23,7 +25,10 @@ public class PlayerController : MonoBehaviour
 
     private RaycastHit groundHit;
 
-   
+    private bool isClimbing;
+    private Vector3 opposite_direction;
+    public bool unStickPhase = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -37,17 +42,24 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
+        if (!isClimbing)
+            Move();
+        /*else
+            Climbing();*/
+
 
         if (Input.GetKeyDown(KeyCode.Space))
-            Jump();
+            if(!isClimbing)
+                Jump();
+            else 
+                UnStick();
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             moveSpeed = 5;
         else if (Input.GetKeyUp(KeyCode.LeftShift))
             moveSpeed = 3;
 
-            ControlMaterialPhysics();
+        ControlMaterialPhysics();
     }
 
     private void Move()
@@ -64,8 +76,23 @@ public class PlayerController : MonoBehaviour
         direction *= moveSpeed;
         direction.y = rigidbody.velocity.y;
 
+    
         rigidbody.velocity = direction;
+  
+        
+        //rigidbody.MovePosition(transform.position + direction * Time.deltaTime);
     }
+    
+    void Climbing()
+    {
+        /*
+         * Muove sulle assi x e y considerando la rotazione attuale
+         * 
+         */
+        Vector3 direction = Input.GetAxis("Horizontal") * transform.right +  Input.GetAxis("Vertical") * transform.up;
+        rigidbody.MovePosition(transform.position + direction * Time.deltaTime * 10);
+    }
+    
 
     private void Jump()
     {
@@ -79,6 +106,18 @@ public class PlayerController : MonoBehaviour
             rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
+
+    private void UnStick()
+    {
+        //unStickPhase = true;
+        rigidbody.isKinematic = false;
+        isClimbing = false;
+        Vector3 unStickForce = opposite_direction * jumpForce;
+        Debug.Log("unstick force: " + unStickForce + rigidbody.isKinematic);
+        rigidbody.AddForce(unStickForce, ForceMode.Impulse);
+        
+    }
+    
     public bool IsGrounded()
     {
         /*
@@ -89,7 +128,8 @@ public class PlayerController : MonoBehaviour
         //Debug.Log(Physics.Raycast(transform.position, -Vector3.up, 1f));
         float colliderHeight = _capsuleCollider.height;
         Ray ray = new Ray(transform.position + new Vector3(0, colliderHeight / 2, 0), Vector3.down);
-        //Debug.Log(Physics.Raycast(ray2, out groundHit, (colliderHeight / 2) + 0.2f));
+        
+        //Debug.Log(Physics.Raycast(ray, out groundHit, (colliderHeight / 2) + 0.2f));
         return Physics.Raycast(ray, out groundHit, (colliderHeight / 2) + 0.2f);
     }
 
@@ -120,6 +160,7 @@ public class PlayerController : MonoBehaviour
          */
         
         _lives -= 1;
+        Messenger.Broadcast(GameEvent.PLAYER_DIE);
         Debug.Log("Life " + _lives);
     }
 
@@ -141,5 +182,17 @@ public class PlayerController : MonoBehaviour
     {
         return respawnPosition;
     }
-    
+
+    public void SetClimbing(bool value, Vector3 opposite_direction)
+    {
+        isClimbing = value;
+        this.opposite_direction = opposite_direction;
+    }
+
+    public bool IsClimbing()
+    {
+        return isClimbing;
+    }
+
+  
 }

@@ -13,10 +13,21 @@ public class CameraOrbit : MonoBehaviour
     [SerializeField] private bool invertXRotation;
     private float curXRot;
 
+    [SerializeField]
+    private Transform target;
+    [SerializeField]
+    private Transform camera;
+
+    private bool zoomPosition;
+    private Vector3 previousPosition;
+
+    private float initialDistance;
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        zoomPosition = false;
+        initialDistance = Vector3.Distance(target.position, camera.position);
     }
     
     private void LateUpdate()
@@ -43,6 +54,58 @@ public class CameraOrbit : MonoBehaviour
         clampedAngle.x = curXRot;
 
         cameraAnchor.eulerAngles = clampedAngle;
+        
+        ObstaclesBetweenTarget();
     }
+
+    
+    private void ObstaclesBetweenTarget()
+    {
+        /*
+         *  potrebbe andare meglio, da chiedere al prof
+         * 
+         */
+        
+        
+        float dist = Vector3.Distance(camera.position, target.transform.position);
+        Quaternion lookRotation = Quaternion.Euler(camera.eulerAngles);
+        Vector3 lookDirection = lookRotation * Vector3.forward;
+        Vector3 lookPosition = target.position - lookDirection * dist;
+        
+        if (Physics.Raycast(target.position, -lookDirection, out RaycastHit hit, dist))
+        {
+            if (!zoomPosition)
+            {
+                previousPosition = lookPosition;
+            }
+
+            if (!hit.collider.tag.Equals("Respawn"))
+            {
+                //Debug.Log(hit.collider.name);
+                lookPosition = target.position - lookDirection * hit.distance;
+                zoomPosition = true;
+            }
+        }
+        else if (zoomPosition)
+        {
+            //float dist2 = Vector3.Distance(previousPosition, target.transform.position);
+            if (!Physics.Raycast(target.position, -lookDirection, out RaycastHit hit2, initialDistance))
+            {
+                previousPosition = lookPosition;
+                
+                lookPosition = target.position - lookDirection * initialDistance;
+                zoomPosition = false;
+                
+            }
+                    
+            //Debug.Log(previousPosition);
+            //Debug.Log("uscito");
+        }
+        
+        
+        camera.SetPositionAndRotation(lookPosition, lookRotation);
+
+    }
+    
     
 }
