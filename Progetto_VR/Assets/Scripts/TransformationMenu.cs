@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TransformationMenu : MonoBehaviour
 {
-    private Vector3 centerOfTheScreen = new Vector3(551,307,0);
+    private Vector3 centerOfTheScreen = new Vector2(551,307);
 
     private Transformation.TypeOfTransformation _selectedType;
 
@@ -26,69 +26,51 @@ public class TransformationMenu : MonoBehaviour
     {
         
         /* calcolo la differenza tra la posizione del mouse e il centro dello schermo */
-        Vector3 mouseDelta = Input.mousePosition - centerOfTheScreen;
+        Vector2 mouseDelta = Input.mousePosition - centerOfTheScreen;
         /* calcolo la direzione utilizzando la normale della variazione del movimento del mouse*/
-        Vector3 direction = mouseDelta.normalized;
+      
+        float angle = (Mathf.Atan2(mouseDelta.x, mouseDelta.y) / Mathf.PI) * 180f;
+        if (angle < 0)
+            angle += 360;
         
-        /*
-         * uso Vector3.Dot per capire la direzione del movimento
-         * prendo memoria della trasformazione attualmente selezionata
-         * imposto il colore per far capire di quale tipo di trasformazione ho preso memoria
-         * 
-         */
-        float dot = Vector3.Dot(direction, Vector3.up);
-        if (dot > 0.5) {
-            //UP
-            float dot2 = Vector3.Dot(direction, Vector3.right);
-            if (dot2 > 0.5)
-            {
-                // UP RIGHT
-                _selectedType = Transformation.TypeOfTransformation.Gomma;
-                ResetColor();
-                _rubberImage.color = new Color32(191, 195, 126,255);
-            }
-            else if (dot2 < 0.5)
-            {
-                // UP LEFT
-                _selectedType = Transformation.TypeOfTransformation.Default;
-                ResetColor();
-                _defaultImage.color = new Color32(191, 195, 126,255);
-            }
+        if(angle>=0 && angle < 60)
+        {
+            _selectedType = Transformation.TypeOfTransformation.Gomma;
+            ResetColor();
+            _rubberImage.color = new Color32(191, 195, 126, 255);
         }
-        else if (dot < -0.5) { //can be <= for sideways
-            //DOWN
-            float dot2 = Vector3.Dot(direction, Vector3.right);
-            if (dot2 > 0.5)
-            {
-                //DOWN RIGHT
-                _selectedType = Transformation.TypeOfTransformation.Ghiaccio;
-                ResetColor();
-                _iceImage.color = new Color32(191, 195, 126, 255);
-            }
-            else if (dot2 < 0.5)
-            {
-                //DOWN LEFT
-                _selectedType = Transformation.TypeOfTransformation.Colla;
-                ResetColor();
-                _glueImage.color = new Color32(191, 195, 126, 255);
-            }
-                
+        else if (angle >= 60 && angle < 120)
+        {
+            _selectedType = Transformation.TypeOfTransformation.Rame;
+            ResetColor();
+            _coppertImage.color = new Color32(191, 195, 126, 255);
         }
-        else {
-            dot = Vector3.Dot(direction, Vector3.right);
-            if (dot > 0.5) { //can be >= for sideways
-                //RIGHT
-                _selectedType = Transformation.TypeOfTransformation.Rame;
-                ResetColor();
-                _coppertImage.color = new Color32(191, 195, 126, 255);
-            }
-            else if (dot < -0.5) { //can be <= for sideways
-                //LEFT
-                _selectedType = Transformation.TypeOfTransformation.Carta;
-                ResetColor();
-                _paperImage.color = new Color32(191, 195, 126, 255);
-            }
+        else if (angle >= 120 && angle < 180)
+        {
+            _selectedType = Transformation.TypeOfTransformation.Ghiaccio;
+            ResetColor();
+            _iceImage.color = new Color32(191, 195, 126, 255);
         }
+        else if (angle >= 180 && angle < 240)
+        {
+            _selectedType = Transformation.TypeOfTransformation.Colla;
+            ResetColor();
+            _glueImage.color = new Color32(191, 195, 126, 255);
+        }
+        else if (angle >= 240 && angle < 300)
+        {
+            _selectedType = Transformation.TypeOfTransformation.Carta;
+            ResetColor();
+            _paperImage.color = new Color32(191, 195, 126, 255);
+        }
+        else
+        {
+            _selectedType = Transformation.TypeOfTransformation.Default;
+            ResetColor();
+            _defaultImage.color = new Color32(191, 195, 126, 255);
+        }
+
+      
 
         if (Input.GetMouseButtonUp(1))
         {
