@@ -26,15 +26,16 @@ public class Kill : MonoBehaviour
          */
 
         PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
-        Transfomation transfomation = other.gameObject.GetComponent<Transfomation>();
+        Transformation transfomation = other.gameObject.GetComponent<Transformation>();
         
         if (other.gameObject.tag.Equals("Player"))
         {
-            if (transfomation.transf == Transfomation.Transformation.Ghiaccio && gameObject.tag.Equals("Water"))
+            if (transfomation.transf == Transformation.TypeOfTransformation.Ghiaccio && gameObject.tag.Equals("Water"))
                 ;
             else
             {
                 other.gameObject.transform.position = playerController.getRespawnPosition();
+                other.transform.parent = null;
                 playerController.Hurt();
             }
             

@@ -194,5 +194,8 @@ public class PlayerController : MonoBehaviour
         return isClimbing;
     }
 
-  
+    public void SetJumpForce(float value)
+    {
+        jumpForce = value;
+    }
 }

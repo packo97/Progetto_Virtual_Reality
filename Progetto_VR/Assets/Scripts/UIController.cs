@@ -7,8 +7,8 @@ public class UIController : MonoBehaviour
 {
     [SerializeField] private PauseMenu _pauseMenu;
     [SerializeField] private GameObject _imageLivesContenitor;
-
     [SerializeField] private Slider _stickTimeSlider;
+    [SerializeField] private TransformationMenu _transformationMenu;
     
     private int lives;
     
@@ -18,6 +18,8 @@ public class UIController : MonoBehaviour
         Messenger.AddListener(GameEvent.ON_STICK_TIME, OnStickTime);
         Messenger.AddListener(GameEvent.OFF_STICK_TIME, OffStickTime);
         Messenger.AddListener(GameEvent.DECREASE_STICK_TIME, DecreaseStickTime);
+        Messenger.AddListener(GameEvent.OPEN_MENU_TRANSFORMATION, OpenMenuTransformation);
+        Messenger.AddListener(GameEvent.CLOSE_MENU_TRANSFORMATION, CloseMenuTransformation);
     }
 
     private void OnDestroy()
@@ -26,6 +28,8 @@ public class UIController : MonoBehaviour
         Messenger.RemoveListener(GameEvent.ON_STICK_TIME, OnStickTime);
         Messenger.RemoveListener(GameEvent.OFF_STICK_TIME, OffStickTime);
         Messenger.RemoveListener(GameEvent.DECREASE_STICK_TIME, DecreaseStickTime);
+        Messenger.RemoveListener(GameEvent.OPEN_MENU_TRANSFORMATION, OpenMenuTransformation);
+        Messenger.RemoveListener(GameEvent.CLOSE_MENU_TRANSFORMATION, CloseMenuTransformation);
     }
     
     // Start is called before the first frame update
@@ -33,11 +37,17 @@ public class UIController : MonoBehaviour
     {
         _pauseMenu.Close();
         _stickTimeSlider.gameObject.SetActive(false);
+        _transformationMenu.Close();
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
+         * Apri il menu se il gioco non è in pausa.
+         * Chiudi il menu se il gioco è in pausa.
+         * 
+         */
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!GameEvent.isPaused)
@@ -87,6 +97,16 @@ public class UIController : MonoBehaviour
          * 
          */
         _stickTimeSlider.value -= 1;
+    }
+
+    private void OpenMenuTransformation()
+    {
+        _transformationMenu.Open();
+    }
+
+    private void CloseMenuTransformation()
+    {
+        _transformationMenu.Close();
     }
  
 }

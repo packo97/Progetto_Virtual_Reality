@@ -37,25 +37,28 @@ public class CameraOrbit : MonoBehaviour
          * Impone dei limiti sulla rotazione intorno all'asse x.
          * 
          */
+        if (!GameEvent.isChoosingTransformation)
+        {
+            float x = Input.GetAxis("Mouse X");
+            float y = Input.GetAxis("Mouse Y");
+
+            transform.eulerAngles += Vector3.up * x * lookSensitivity;
         
-        float x = Input.GetAxis("Mouse X");
-        float y = Input.GetAxis("Mouse Y");
+            if (invertXRotation)
+                curXRot += y * lookSensitivity;
+            else
+                curXRot -= y * lookSensitivity;
 
-        transform.eulerAngles += Vector3.up * x * lookSensitivity;
+            curXRot = Mathf.Clamp(curXRot, minXLook, maxXlook);
+
+            Vector3 clampedAngle = cameraAnchor.eulerAngles;
+            clampedAngle.x = curXRot;
+
+            cameraAnchor.eulerAngles = clampedAngle;
         
-        if (invertXRotation)
-            curXRot += y * lookSensitivity;
-        else
-            curXRot -= y * lookSensitivity;
-
-        curXRot = Mathf.Clamp(curXRot, minXLook, maxXlook);
-
-        Vector3 clampedAngle = cameraAnchor.eulerAngles;
-        clampedAngle.x = curXRot;
-
-        cameraAnchor.eulerAngles = clampedAngle;
+            ObstaclesBetweenTarget();
+        }
         
-        ObstaclesBetweenTarget();
     }
 
     

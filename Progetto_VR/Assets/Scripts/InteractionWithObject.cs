@@ -7,12 +7,12 @@ public class InteractionWithObject : MonoBehaviour
 {
     private GameObject interactable_object;
     private bool isTaken = false;
-    private Transfomation transformation;
+    private Transformation transformation;
 
     // Start is called before the first frame update
     void Start()
     {
-        transformation = GetComponent<Transfomation>();
+        transformation = GetComponent<Transformation>();
     }
 
     // Update is called once per frame
@@ -61,7 +61,7 @@ public class InteractionWithObject : MonoBehaviour
                     }
                 }
                 
-                if (transformation.transf == Transfomation.Transformation.Rame) 
+                if (transformation.transf == Transformation.TypeOfTransformation.Rame) 
                 {
                     // se interagiamo con un electrical
                     if (hitCollider.gameObject.GetComponent<Electrical>() != null)
