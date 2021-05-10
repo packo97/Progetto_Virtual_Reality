@@ -237,7 +237,7 @@ public class Transformation : MonoBehaviour
             //Debug.Log(normal_y);
             if (horizontalCollision /*&& !GetComponent<PlayerController>().unStickPhase*/)
             {
-                
+                transform.SetParent(collision.collider.transform,true);
                 //Debug.Log("collisione con muro");
                 GetComponent<PlayerController>().SetClimbing(true, collision.contacts[0].normal);
                 _rigidbody.isKinematic = true;
@@ -261,8 +261,11 @@ public class Transformation : MonoBehaviour
          *  o terreno viene salvato il punto di stacco e la booleana di stacco viene settata a true.
          *
          */
-      
-        if ( _isGrounded && (transf == TypeOfTransformation.Gomma))
+        if (transf == TypeOfTransformation.Colla)
+        {
+            transform.parent = null;
+        }
+            if ( _isGrounded && (transf == TypeOfTransformation.Gomma))
         {
             _jumpPoint = transform.position.y;
             _isGrounded = false;
@@ -287,6 +290,7 @@ public class Transformation : MonoBehaviour
         ChangeMaterial();
         isStickTime = false;
         stickTime = 80;
+        transform.parent = null;
         Messenger.Broadcast(GameEvent.OFF_STICK_TIME);
         
     }
