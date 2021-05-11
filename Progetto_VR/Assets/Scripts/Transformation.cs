@@ -6,7 +6,7 @@ using UnityEngine;
 public class Transformation : MonoBehaviour
 {
     //Tipi di materiale per le trasformaz<ioni
-    public enum TypeOfTransformation {Default=0 , Rame, Carta, Ghiaccio, Gomma, Colla};
+    public enum TypeOfTransformation {Default=0, Gomma, Rame, Ghiaccio, Colla, Carta};
     public TypeOfTransformation transf;
     [SerializeField] private Material Default;
     [SerializeField] private Material Rame;
@@ -39,6 +39,7 @@ public class Transformation : MonoBehaviour
     [SerializeField] private int stickTime;
 
     private PlayerController player;
+    private Animator _animator;
     
     private void Awake()
     {
@@ -60,8 +61,10 @@ public class Transformation : MonoBehaviour
          */
         
         transf = type;
-        ChangeMaterial();
+
+        //ChangeMaterial();
         particelle.Play();
+        //_animator.SetInteger("Trasformation", (int) transf);
         
         if (transf == TypeOfTransformation.Carta)
         {
@@ -99,6 +102,7 @@ public class Transformation : MonoBehaviour
         _fallPoint = transform.position.y;
 
         player = GetComponent<PlayerController>();
+        //_animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -238,6 +242,12 @@ public class Transformation : MonoBehaviour
             if (horizontalCollision /*&& !GetComponent<PlayerController>().unStickPhase*/)
             {
                 transform.SetParent(collision.collider.transform,true);
+                /*
+                 tentativo joint mal riuscito
+                  gameObject.AddComponent<FixedJoint>();
+                  GetComponent<FixedJoint>().connectedBody = collision.rigidbody;
+                 */
+                
                 //Debug.Log("collisione con muro");
                 GetComponent<PlayerController>().SetClimbing(true, collision.contacts[0].normal);
                 _rigidbody.isKinematic = true;
@@ -261,6 +271,7 @@ public class Transformation : MonoBehaviour
          *  o terreno viene salvato il punto di stacco e la booleana di stacco viene settata a true.
          *
          */
+        
         if (transf == TypeOfTransformation.Colla)
         {
             transform.parent = null;

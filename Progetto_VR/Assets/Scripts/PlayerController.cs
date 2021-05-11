@@ -28,13 +28,15 @@ public class PlayerController : MonoBehaviour
     private bool isClimbing;
     private Vector3 opposite_direction;
     public bool unStickPhase = false;
+
+    private Animator _animator;
     
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         _capsuleCollider = GetComponent<CapsuleCollider>();
-        
+        _animator = GetComponentInChildren<Animator>();
         
         _lives = 5;
     }
@@ -47,21 +49,29 @@ public class PlayerController : MonoBehaviour
         /*else
             Climbing();*/
 
-
-        if (Input.GetKeyDown(KeyCode.Space))
-            if(!isClimbing)
+        if(!isClimbing && IsGrounded())
+            if (Input.GetKeyDown(KeyCode.Space)) 
                 Jump();
-            else 
+            /*else
+                _animator.SetBool("Jumping", false);*/
+        
+        if(isClimbing)
+            if (Input.GetKeyDown(KeyCode.Space)) 
                 UnStick();
-
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+        
+        if (Input.GetKeyDown(KeyCode.LeftShift))
             moveSpeed = 5;
         else if (Input.GetKeyUp(KeyCode.LeftShift))
             moveSpeed = 3;
 
         ControlMaterialPhysics();
+        
+        /* aggiorno l'animator in base alla velocità del player*/
+       /* _animator.SetFloat("Speed", rigidbody.velocity.magnitude);*/
+        
     }
-
+    
+    
     private void Move()
     {
         /*
@@ -76,10 +86,10 @@ public class PlayerController : MonoBehaviour
         direction *= moveSpeed;
         direction.y = rigidbody.velocity.y;
 
-    
-        rigidbody.velocity = direction;
-  
         
+        rigidbody.velocity = direction;
+        
+       
         //rigidbody.MovePosition(transform.position + direction * Time.deltaTime);
     }
     
@@ -101,10 +111,11 @@ public class PlayerController : MonoBehaviour
          * 
          */
         
-        if (IsGrounded())
-        {
+        //if (IsGrounded())
+        //{
             rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        }
+          /*  _animator.SetBool("Jumping", true);*/
+        //}
     }
 
     private void UnStick()
