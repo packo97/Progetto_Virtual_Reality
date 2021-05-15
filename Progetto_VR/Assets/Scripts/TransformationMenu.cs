@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TransformationMenu : MonoBehaviour
 {
-    private Vector3 centerOfTheScreen = new Vector2(551,307);
+    private Vector3 centerOfTheScreen;
 
     private Transformation.TypeOfTransformation _selectedType;
 
@@ -18,7 +18,8 @@ public class TransformationMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        centerOfTheScreen = new Vector2(Screen.width / 2, Screen.height / 2);
+
     }
 
     // Update is called once per frame
@@ -118,7 +119,7 @@ public class TransformationMenu : MonoBehaviour
          * Chiudo il menu di scelta delle trasformazioni
          * 
          */
-        
+        //Debug.Log("chiudo");
         gameObject.SetActive(false);
         GameEvent.isChoosingTransformation = false;
         Cursor.lockState = CursorLockMode.Locked;

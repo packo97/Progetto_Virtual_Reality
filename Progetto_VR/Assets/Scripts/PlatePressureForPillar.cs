@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class PlatePressureForPillar : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject pillar1;
-
-    [SerializeField]
-    private GameObject pillar2;
+    [SerializeField] private PillarMovement[] pillars;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -28,11 +26,17 @@ public class PlatePressureForPillar : MonoBehaviour
          * 
          */
 
-
-        if (pillar1)
-            pillar1.GetComponent<PillarMovement>().Movement();
-        if (pillar2)
-            pillar2.GetComponent<PillarMovement>().Movement();
-
+        bool someoneIsMoving = false;
+        foreach (PillarMovement pillarMovement in pillars)
+        {
+            if (pillarMovement.IsMoving())
+                someoneIsMoving = true;
+        }
+        
+        if (!someoneIsMoving)
+            foreach (PillarMovement pillarMovement in pillars)
+            {
+                pillarMovement.Movement();
+            }
     }
 }

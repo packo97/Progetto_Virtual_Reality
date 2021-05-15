@@ -26,9 +26,18 @@ public class IcePlane : MonoBehaviour
          */
         
         yield return new WaitForSeconds(8);
-        IceStation station = iceStationChild.GetComponentInParent<IceStation>();
-        if(!station.IsFrozenStation())
+
+        IceStation station = null;
+        if (iceStationChild != null)
+        {
+            station = iceStationChild.GetComponentInParent<IceStation>();
+            if(!station.IsFrozenStation())
+                Destroy(gameObject);
+        }
+        else
+        {
             Destroy(gameObject);
+        }
     }
     
     
@@ -51,6 +60,7 @@ public class IcePlane : MonoBehaviour
         /*
          * Scongela il lato che era ghiacciato se presente
          */
-        iceStationChild.setFrozen(false);
+        if (iceStationChild != null)
+            iceStationChild.setFrozen(false);
     }
 }

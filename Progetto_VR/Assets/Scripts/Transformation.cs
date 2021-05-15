@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class Transformation : MonoBehaviour
@@ -40,6 +41,9 @@ public class Transformation : MonoBehaviour
 
     private PlayerController player;
     private Animator _animator;
+
+    private SkinnedMeshRenderer _skinnedMeshRenderer;
+    private Material[] defaultMaterials;
     
     private void Awake()
     {
@@ -62,7 +66,7 @@ public class Transformation : MonoBehaviour
         
         transf = type;
 
-        //ChangeMaterial();
+        ChangeMaterial();
         particelle.Play();
         //_animator.SetInteger("Trasformation", (int) transf);
         
@@ -102,7 +106,9 @@ public class Transformation : MonoBehaviour
         _fallPoint = transform.position.y;
 
         player = GetComponent<PlayerController>();
-        //_animator = GetComponentInChildren<Animator>();
+        _animator = GetComponentInChildren<Animator>();
+        _skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        defaultMaterials = _skinnedMeshRenderer.materials;
     }
 
     // Update is called once per frame
@@ -140,9 +146,10 @@ public class Transformation : MonoBehaviour
          * 
          */
         
-        Material[] materials = meshRenderer.materials;
+        //Material[] materials = meshRenderer.materials;
+        Material[] materials = _skinnedMeshRenderer.materials;
         
-        Material temp;
+        Material temp = null;
         if (transf == TypeOfTransformation.Rame)
         {
             temp = Rame;
@@ -163,13 +170,21 @@ public class Transformation : MonoBehaviour
         {
             temp = Colla;
         }
-        else
-        {
-            temp = Default;
-        }
 
-        materials[0] = temp;
-        meshRenderer.materials = materials;
+        if (transf == TypeOfTransformation.Default)
+        {
+            materials = defaultMaterials;
+            temp = materials[0];
+        }
+        else
+        for (int i = 0; i < materials.Length; i++)
+            materials[i] = temp;
+        
+        //Debug.Log("cambia material");
+
+        //materials[0] = temp;
+        //meshRenderer.materials = materials;
+        _skinnedMeshRenderer.materials = materials;
         particelle.startColor = temp.color;
     }
     
@@ -236,22 +251,31 @@ public class Transformation : MonoBehaviour
         
         if (transf == TypeOfTransformation.Colla)
         {
+            float knees = transform.position.y + GetComponent<CapsuleCollider>().height / 2;
+            
             float normal_y = collision.contacts[0].normal.y;
             bool horizontalCollision = !(normal_y >= 0.9f && normal_y <= 1.1);
-            //Debug.Log(normal_y);
-            if (horizontalCollision /*&& !GetComponent<PlayerController>().unStickPhase*/)
+            
+            bool collisionAboveKnees = false;
+            foreach (ContactPoint contactPoint in collision.contacts)
             {
-                transform.SetParent(collision.collider.transform,true);
-                /*
-                 tentativo joint mal riuscito
-                  gameObject.AddComponent<FixedJoint>();
-                  GetComponent<FixedJoint>().connectedBody = collision.rigidbody;
-                 */
+                if (contactPoint.point.y > knees)
+                    collisionAboveKnees = true;
+            }
+            
+            //Debug.Log(normal_y);
+            if (horizontalCollision && collisionAboveKnees)
+            {
+                //transform.SetParent(collision.collider.transform,true);
+                
+                gameObject.AddComponent<FixedJoint>();
+                GetComponent<FixedJoint>().connectedBody = collision.rigidbody;
+                
                 
                 //Debug.Log("collisione con muro");
                 GetComponent<PlayerController>().SetClimbing(true, collision.contacts[0].normal);
-                _rigidbody.isKinematic = true;
-                _rigidbody.detectCollisions = true;
+                //_rigidbody.isKinematic = true;
+                //_rigidbody.detectCollisions = true;
                 
                if (!isStickTime)
                {
@@ -274,7 +298,8 @@ public class Transformation : MonoBehaviour
         
         if (transf == TypeOfTransformation.Colla)
         {
-            transform.parent = null;
+            //transform.parent = null;
+            //GetComponent<FixedJoint>().connectedBody = null;
         }
             if ( _isGrounded && (transf == TypeOfTransformation.Gomma))
         {
@@ -295,44 +320,20 @@ public class Transformation : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.1f);
         }
 
-        _rigidbody.isKinematic = false;
+        Destroy(GetComponent<FixedJoint>());
+        
         GetComponent<PlayerController>().SetClimbing(false, Vector3.zero);
         transf = TypeOfTransformation.Default;
         ChangeMaterial();
         isStickTime = false;
         stickTime = 80;
-        transform.parent = null;
+        
         Messenger.Broadcast(GameEvent.OFF_STICK_TIME);
         
     }
-    
-    /*
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (transf == Transformation.Colla && collision.gameObject.tag.Equals("Climbing"))
-        {
-            GetComponent<PlayerController>().SetClimbing(true);
-            _rigidbody.isKinematic = true;
-            _rigidbody.detectCollisions = true;
-            
-            if (!collaTime)
-            {
-                collaTime = true;
-                StartCoroutine(CollaTime());
-            }
-        }
-    }
-    */
-    
-    /*
-    private void OnTriggerExit(Collider other)
-    {
-        if (transf == Transformation.Colla && GetComponent<PlayerController>().IsClimbing())
-        {
-            GetComponent<PlayerController>().SetClimbing(false);
-            _rigidbody.isKinematic = false;
 
-        }
+    public void ResetStick()
+    {
+        stickTime = 0;
     }
-    */
 }
