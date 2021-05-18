@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
@@ -270,8 +271,9 @@ public class Transformation : MonoBehaviour
                 
                 gameObject.AddComponent<FixedJoint>();
                 GetComponent<FixedJoint>().connectedBody = collision.rigidbody;
-                
-                
+                Debug.Log(collision.collider.GetComponent<Transform>().parent.GetComponentInChildren<PillarMovement>());
+                //collision.collider.GetComponent<Transform>().parent.GetComponentInChildren<PillarMovement>().forceMovement = 200;
+                    
                 //Debug.Log("collisione con muro");
                 GetComponent<PlayerController>().SetClimbing(true, collision.contacts[0].normal);
                 //_rigidbody.isKinematic = true;

@@ -11,7 +11,7 @@ public class PillarMovement : MonoBehaviour
     [SerializeField] private Transform start;
     [SerializeField] private Transform end;
 
-    [SerializeField] private float forceMovement;
+    [SerializeField] public float forceMovement;
 
     private bool isMoving;
     

@@ -38,17 +38,9 @@ public class OrbitCameraRB : MonoBehaviour
     {
         if (!GameEvent.isChoosingTransformation)
         {
-            float horInput = Input.GetAxis("Horizontal");
-        
-            if (horInput != 0)
-            {
-                _rotY += horInput * rotSpeed;
-            }
-            else
-            {
-                _rotY += Input.GetAxis("Mouse X") * rotSpeed * 3;
-            }
-
+            
+            _rotY += Input.GetAxis("Mouse X") * rotSpeed * 3;
+            
             _rotX += Input.GetAxis("Mouse Y") * rotSpeed * 3;
             _rotX = Mathf.Clamp(_rotX, -30, 120);
 
