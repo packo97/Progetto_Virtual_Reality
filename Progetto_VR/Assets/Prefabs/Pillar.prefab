@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 2409325848570833885}
   - component: {fileID: 2409325848570833884}
   - component: {fileID: 2409325848570833881}
+  - component: {fileID: 7338140957449455242}
   m_Layer: 0
   m_Name: gancio
   m_TagString: Untagged
@@ -272,12 +273,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08e47647772300105969d8f726ddf2de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endPosition: {x: 0, y: 0, z: 0}
-  speed: 0
   target: end
   start: {fileID: 0}
   end: {fileID: 0}
-  forceMovement: 0
+  forceMovement: 20
+  isMoving: 0
+  constantForceValue: 500
+--- !u!75 &7338140957449455242
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2409325848570833887}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!1 &2409325849383041538
 GameObject:
   m_ObjectHideFlags: 0

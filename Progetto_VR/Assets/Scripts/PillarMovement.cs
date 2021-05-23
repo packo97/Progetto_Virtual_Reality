@@ -13,12 +13,17 @@ public class PillarMovement : MonoBehaviour
 
     [SerializeField] public float forceMovement;
 
-    private bool isMoving;
+    public bool isMoving;
+
+    private ConstantForce _constantForce;
+    [SerializeField] private float constantForceValue;
+    private Vector3 direction;
     
     // Start is called before the first frame update
     void Start()
     {
         isMoving = false;
+        _constantForce = GetComponent<ConstantForce>();
     }
 
     // Update is called once per frame
@@ -42,7 +47,7 @@ public class PillarMovement : MonoBehaviour
     IEnumerator ForceMovement()
     {
         isMoving = true;
-        Vector3 direction;
+        
 
         if (target == "end")
         {
@@ -89,21 +94,17 @@ public class PillarMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-
-        if (other.collider.name == "start")
+        if (other.collider.name.Equals("start"))
         {
             isMoving = false;
             target = "end";
         }
             
-        else if (other.collider.name == "end")
+        else if (other.collider.name.Equals("end"))
         {
             target = "start";
             isMoving = false;
         }
-            
-        
-        
     }
     
     public bool IsMoving()
@@ -111,4 +112,38 @@ public class PillarMovement : MonoBehaviour
         return isMoving;
     }
 
+
+    public void AddConstantForce()
+    {
+        _constantForce.enabled = true;
+        if (target == "end")
+        {
+            direction = (end.position - start.position).normalized;
+        }
+        else
+        {
+            direction = (start.position - end.position).normalized;
+        }
+        if (Vector3.Distance(direction, Vector3.left) == 0)
+        {
+            _constantForce.relativeForce = new Vector3(-constantForceValue, 0, 0);
+        }
+        else if (Vector3.Distance(direction,Vector3.right)==0)
+        {
+            _constantForce.relativeForce = new Vector3(constantForceValue, 0, 0);
+        }
+        else if (Vector3.Distance(direction,Vector3.forward)==0)
+        {
+            _constantForce.relativeForce = new Vector3(0, 0, constantForceValue);
+        }
+        else if (Vector3.Distance(direction,Vector3.back)==0)
+        {
+            _constantForce.relativeForce = new Vector3(0, 0, -constantForceValue);
+        }
+    }
+
+    public void RemoveConstantForce()
+    {
+        _constantForce.enabled = false;
+    }
 }

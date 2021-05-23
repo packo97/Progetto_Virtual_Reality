@@ -21,4 +21,15 @@ public class WindForce : MonoBehaviour
 
         }
     }
+    private void OnDisable()
+    {
+        GetComponentInParent<Spin>().enabled = false;
+    }
+
+
+
+    private void OnEnable()
+    {
+        GetComponentInParent<Spin>().enabled = true;
+    }
 }

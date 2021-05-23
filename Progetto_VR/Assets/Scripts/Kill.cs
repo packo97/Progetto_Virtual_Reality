@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Kill : MonoBehaviour
 {
-    
+    public enum TypeOfKill {Electricity, Water, Acid, Fall};
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,8 +36,7 @@ public class Kill : MonoBehaviour
             else
             {
                 other.gameObject.transform.position = playerController.getRespawnPosition();
-                other.transform.parent = null;
-                playerController.Hurt();
+                playerController.Hurt(TypeOfKill.Water);
             }
             
            
@@ -46,14 +46,13 @@ public class Kill : MonoBehaviour
     private void OnParticleCollision(GameObject other)
     {
         /*
-         * 1 - Se collide con particelle che sono taggate cond "Die" -> cambia la posizione attuale nella respawn position
-         *     e diminuisci la vita di 1.
+         * 1 - Se collide con particelle che sono taggate cond "Die" -> comunica la Player Controller di essere
+         * stato colpito.
          */
         PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
-        if (other.tag.Equals("Player"))
+        if (other.tag.Equals("Player") && other.GetComponent<Transformation>().transf != Transformation.TypeOfTransformation.Gomma)
         {
-            other.gameObject.transform.position = playerController.getRespawnPosition();
-            playerController.Hurt();
+            playerController.Hurt(TypeOfKill.Electricity);
         }
     }
 }
