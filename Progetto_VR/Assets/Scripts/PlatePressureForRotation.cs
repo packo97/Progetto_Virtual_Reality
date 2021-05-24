@@ -20,11 +20,14 @@ public class PlatePressureForRotation : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("on trigger enter con " + other.name);
+
         foreach (GameObject obj in gameObjects)
         {
             if (obj.GetComponent<Rotation>())
                 StartCoroutine(obj.GetComponent<Rotation>().ObjectRotation());
         }    
+        
+            
     }
     
     

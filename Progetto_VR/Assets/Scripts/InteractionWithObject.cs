@@ -70,30 +70,42 @@ public class InteractionWithObject : MonoBehaviour
                     if (hitCollider.gameObject.GetComponent<Electrical>() != null)
                     {
                         ElectricBehavior electricity = hitCollider.gameObject.GetComponentInChildren<ElectricBehavior>(true);
-                        //vediamo se l'electrical è attivo
-                        bool isElectricalActive = electricity.gameObject.activeSelf;
-                        
-                        ElectricBehavior electricityOnPlayer = GetComponentInChildren<ElectricBehavior>(true);
-                        //se interagiamo con l'electrical active ci attiviamo le nostre particelle
-                        if (isElectricalActive)
+                        Vector3 forward = transform.TransformDirection(Vector3.forward);
+                        Vector3 toOther = electricity.transform.position - transform.position;
+                        bool isInFrontOfMe = false;
+                        if (Vector3.Dot(forward, toOther) > 0)
                         {
-                            Debug.Log("electrical acceso");
-                            electricityOnPlayer.ElectricSwitch();
-                            Debug.Log(electricityOnPlayer.gameObject.activeSelf);
-                            Messenger<float>.Broadcast(GameEvent.ON_STICK_TIME, electricalTime);
-                            StartCoroutine(ElectricalTime());
+                            isInFrontOfMe = true;
                         }
-                        else //se interagiamo con l'electrical spento ma noi siamo carichi lo attiviamo e noi perdiamo la carica
+
+                        if (isInFrontOfMe)
                         {
-                            Debug.Log("electrical spento");
-                            //vediamo se noi siamo carichi
-                            bool isElectricityActiveOnPlayer = electricityOnPlayer.gameObject.activeSelf;
-                            if (isElectricityActiveOnPlayer)
+                            //vediamo se l'electrical è attivo
+                            bool isElectricalActive = electricity.gameObject.activeSelf;
+                        
+                            ElectricBehavior electricityOnPlayer = GetComponentInChildren<ElectricBehavior>(true);
+                            //se interagiamo con l'electrical active ci attiviamo le nostre particelle
+                            if (isElectricalActive)
                             {
-                                electricity.ElectricSwitch();
+                                Debug.Log("electrical acceso");
                                 electricityOnPlayer.ElectricSwitch();
+                                Debug.Log(electricityOnPlayer.gameObject.activeSelf);
+                                Messenger<float>.Broadcast(GameEvent.ON_STICK_TIME, electricalTime);
+                                StartCoroutine(ElectricalTime());
+                            }
+                            else //se interagiamo con l'electrical spento ma noi siamo carichi lo attiviamo e noi perdiamo la carica
+                            {
+                                Debug.Log("electrical spento");
+                                //vediamo se noi siamo carichi
+                                bool isElectricityActiveOnPlayer = electricityOnPlayer.gameObject.activeSelf;
+                                if (isElectricityActiveOnPlayer)
+                                {
+                                    electricity.ElectricSwitch();
+                                    electricityOnPlayer.ElectricSwitch();
+                                }
                             }
                         }
+                        
                     }
                 }
                 
@@ -104,7 +116,18 @@ public class InteractionWithObject : MonoBehaviour
                 if (hitCollider.GetComponent<GateAccessMachine>())
                 {
                     GateAccessMachine gateAccessMachine = hitCollider.GetComponent<GateAccessMachine>();
-                    gateAccessMachine.AccessMachine();
+                    
+                    Vector3 forward = transform.TransformDirection(Vector3.forward);
+                    Vector3 toOther = gateAccessMachine.transform.position - transform.position;
+                    
+                    bool isInFrontOfMe = false;
+                    if (Vector3.Dot(forward, toOther) > 0)
+                    {
+                        isInFrontOfMe = true;
+                    }
+                    
+                    if (isInFrontOfMe)
+                        gateAccessMachine.AccessMachine();
                     //isEnteringCode = true;
                 }
                 
@@ -116,16 +139,26 @@ public class InteractionWithObject : MonoBehaviour
                 if (hitCollider.GetComponent<CrateController>())
                 {
                     CrateController crateController = hitCollider.GetComponent<CrateController>();
-                    if (!crateController.isOpen)
+                    
+                    Vector3 forward = transform.TransformDirection(Vector3.forward);
+                    Vector3 toOther = crateController.transform.position - transform.position;
+                    bool isInFrontOfMe = false;
+                    if (Vector3.Dot(forward, toOther) > 0)
                     {
-                        Debug.Log("Prendi una " + crateController.contenuto);
+                        isInFrontOfMe = true;
+                    }
+                    
+                    if (!crateController.isOpen && isInFrontOfMe)
+                    {
                         crateController.OpenCrate();
                     }
-                    else
+                    else if (crateController.isOpen && isInFrontOfMe)
                     {
-                        Debug.Log("chiudi cassa");
                         crateController.CloseCrate();
                     }
+
+                    // per evitare che due casse vicine vengano aperte contemporaneamente
+                    break;
                 }
                 
             }

@@ -37,7 +37,8 @@ public class PlayerController : MonoBehaviour
 
 
     private bool isDied;
-    
+
+    private ContactPoint _contactPoint;
     
     private void Awake()
     {
@@ -106,6 +107,18 @@ public class PlayerController : MonoBehaviour
         if (horInput != 0 || vertInput != 0)
         {
             _rigidbody.isKinematic = false;
+            
+            Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1f);
+            //soluzione per salire le scale
+            if (hit.normal.y > 0 && hit.normal.y < 1)
+            {
+                _rigidbody.useGravity = false;
+            }
+            else
+            {
+                _rigidbody.useGravity = true;
+            }
+            
             if (Input.GetKey(KeyCode.LeftShift) && !isJumping)
             {
                 currentSpeed = groundSpeed * 2;
@@ -155,10 +168,17 @@ public class PlayerController : MonoBehaviour
             }
         }
         
+        //QUESTIONE SLOP SURFACE
+        /*
+        Vector3 surface_normal = groundHit.normal;
+        Debug.Log("surface: " + surface_normal);
+        Vector3 temp = Vector3.Cross(surface_normal, movement);
+        Vector3 myDirection = Vector3.Cross(temp, surface_normal);
+        myDirection *= Time.deltaTime;
+        Debug.Log("Unity: " + myDirection);
+        */
         
         movement *= Time.deltaTime;
-        
-        //Debug.Log(groundHit.normal);
         _rigidbody.MovePosition(transform.position + movement);
     }
     
@@ -203,11 +223,12 @@ public class PlayerController : MonoBehaviour
         float colliderHeight = _capsuleCollider.height + _capsuleCollider.radius * 2;
         Ray ray = new Ray(transform.position + new Vector3(0, colliderHeight / 2, 0), Vector3.down);
         
-        if (Physics.Raycast(ray, out groundHit, (colliderHeight / 2) + 0.2f))
+        if (Physics.Raycast(ray, out groundHit, (colliderHeight / 2) + 0.6f))
         {
+            //Debug.Log("Grounded");
             return true;
         }
-
+        
         return false;
     }
     
@@ -314,4 +335,6 @@ public class PlayerController : MonoBehaviour
     {
         return isDied;
     }
+    
+    
 }
