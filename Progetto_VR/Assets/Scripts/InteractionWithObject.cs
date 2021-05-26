@@ -6,7 +6,7 @@ using UnityEngine;
 public class InteractionWithObject : MonoBehaviour
 {
     private GameObject interactable_object;
-    private bool isTaken = false;
+    public bool isTaken = false;
     private Transformation transformation;
 
     
@@ -37,9 +37,13 @@ public class InteractionWithObject : MonoBehaviour
             {
                 if (isTaken)
                 {
+                    
+                    Destroy(interactable_object.GetComponent<FixedJoint>());
                     interactable_object.transform.position = transform.TransformPoint(0, 1, 1);
-                    interactable_object.SetActive(true);
+                    //interactable_object.transform.Rotate(0,0,0);
+                    interactable_object.transform.eulerAngles = Vector3.zero;
                     isTaken = false;
+                    break;
                 }
                 else
                 {
@@ -57,8 +61,17 @@ public class InteractionWithObject : MonoBehaviour
 
                         if (!isTaken && isInFrontOfMe)
                         {
-                            interactable_object.SetActive(false);
                             isTaken = true;
+                            //Debug.Log(transform.TransformPoint(-0.2f, 1.7f, 0.4f));
+                            // le due righe seguenti vanno fixate
+                            interactable_object.transform.position = transform.TransformPoint(-0.2f, 1.7f, 0.4f);
+                            interactable_object.transform.eulerAngles = new Vector3(0,0,-160);
+                            //interactable_object.transform.Rotate(0,0,-160);
+                            
+                            interactable_object.AddComponent<FixedJoint>();
+                            interactable_object.GetComponent<FixedJoint>().connectedBody = gameObject.GetComponent<Rigidbody>();
+                            
+                            break;
                         }
 
                     }

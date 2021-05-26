@@ -53,5 +53,8 @@ public class AnimatorController : MonoBehaviour
          bool isEnteringCode = _interactionWithObject.isEnteringCode;
         _animator.SetBool("EnteringCode", isEnteringCode);
         */
+
+        bool isTaken = _interactionWithObject.isTaken;
+        _animator.SetBool("IsTaken", isTaken);
     }
 }

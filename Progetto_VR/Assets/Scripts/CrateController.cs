@@ -12,11 +12,21 @@ public class CrateController : MonoBehaviour
     [SerializeField] private string codice;
     
     public bool isOpen;
+
+    [SerializeField] private Transform maniglia;
+
+    [SerializeField] private GameObject life;
+
+    [SerializeField] private GameObject paper;
     
     // Start is called before the first frame update
     void Start()
     {
         isOpen = false;
+        if (contenuto == Contenuto.Vita)
+            life.SetActive(true);
+        else if (contenuto == Contenuto.Codice)
+            paper.SetActive(true);
     }
 
     // Update is called once per frame
@@ -40,7 +50,23 @@ public class CrateController : MonoBehaviour
             messaggio = "vuota";
         }
 
+
+        StartCoroutine(OpeningAnimation());
+        
         Messenger<Contenuto,string>.Broadcast(GameEvent.OPEN_CRATE, contenuto, messaggio);
+    }
+
+    private IEnumerator OpeningAnimation()
+    {
+        for (int i = 0; i < 70; i++)
+        {
+            maniglia.Rotate(-1,0,0);
+            yield return new WaitForSeconds(0.01f);
+        }
+        if (contenuto == Contenuto.Vita)
+            life.SetActive(false);
+        else if (contenuto == Contenuto.Codice)
+            paper.SetActive(false);
     }
 
     public void CloseCrate()
@@ -48,6 +74,16 @@ public class CrateController : MonoBehaviour
         isOpen = false;
         if (contenuto == Contenuto.Vita)
             contenuto = Contenuto.Vuota;
+        StartCoroutine(CloseAnimation());
         Messenger.Broadcast(GameEvent.CLOSE_CRATE);
+    }
+    
+    private IEnumerator CloseAnimation()
+    {
+        for (int i = 0; i < 70; i++)
+        {
+            maniglia.Rotate(+1,0,0);
+            yield return new WaitForSeconds(0.01f);
+        }
     }
 }
