@@ -12,8 +12,9 @@ public class GameEvent : MonoBehaviour
 
     public const string OPEN_MENU_TRANSFORMATION = "OPEN_MENU_TRANSFORMATION";
     public const string CLOSE_MENU_TRANSFORMATION = "CLOSE_MENU_TRANSFORMATION";
-
     public const string SELECTED_TRANSFORMATION = "SELECTED_TRANSFORMATION";
+    public const string ENABLE_TRANSFORMATION = "ENABLE_TRANSFORMATION";
+    
 
     public const string OPEN_CRATE = "OPEN_CRATE";
     public const string CLOSE_CRATE = "CLOSE_CRATE";

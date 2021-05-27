@@ -50,7 +50,7 @@ public class Kill : MonoBehaviour
          * stato colpito.
          */
         PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
-        if (other.tag.Equals("Player") && other.GetComponent<Transformation>().transf != Transformation.TypeOfTransformation.Gomma)
+        if (other.tag.Equals("Player") && (other.GetComponent<Transformation>().transf != Transformation.TypeOfTransformation.Gomma && other.GetComponent<Transformation>().transf != Transformation.TypeOfTransformation.Rame))
         {
             playerController.Hurt(TypeOfKill.Electricity);
         }

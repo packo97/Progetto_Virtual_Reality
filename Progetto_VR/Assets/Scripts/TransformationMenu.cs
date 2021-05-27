@@ -11,15 +11,45 @@ public class TransformationMenu : MonoBehaviour
 
     [SerializeField] private Image _defaultImage;
     [SerializeField] private Image _rubberImage;
-    [SerializeField] private Image _coppertImage;
+    [SerializeField] private Image _copperImage;
     [SerializeField] private Image _iceImage;
     [SerializeField] private Image _glueImage;
     [SerializeField] private Image _paperImage;
+
+    private bool _rubber_available;
+    private bool _copper_available;
+    private bool _ice_available;
+    private bool _glue_available;
+    private bool _paper_available;
+    
+    
+    private void Awake()
+    {
+        Messenger<string>.AddListener(GameEvent.ENABLE_TRANSFORMATION, EnableTransformation);
+        
+        centerOfTheScreen = new Vector2(Screen.width / 2, Screen.height / 2);
+
+        _rubber_available = false;
+        _copper_available = false;
+        _ice_available = false;
+        _glue_available = false;
+        _paper_available = false;
+        
+        _rubberImage.color = new Color32(255,255,255,150);
+        _copperImage.color = new Color32(255,255,255,150);
+        _iceImage.color = new Color32(255,255,255,150);
+        _glueImage.color = new Color32(255,255,255,150);
+        _paperImage.color = new Color32(255,255,255,150);
+    }
+    
+    private void OnDestroy()
+    {
+        Messenger<string>.RemoveListener(GameEvent.ENABLE_TRANSFORMATION, EnableTransformation);
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
-        centerOfTheScreen = new Vector2(Screen.width / 2, Screen.height / 2);
-
     }
 
     // Update is called once per frame
@@ -34,40 +64,51 @@ public class TransformationMenu : MonoBehaviour
         if (angle < 0)
             angle += 360;
         
+        ResetColor();
         if(angle>=0 && angle < 60)
         {
-            _selectedType = Transformation.TypeOfTransformation.Gomma;
-            ResetColor();
-            _rubberImage.color = new Color32(191, 195, 126, 255);
+            if (_rubber_available)
+            {
+                _selectedType = Transformation.TypeOfTransformation.Gomma;    
+                _rubberImage.color = new Color32(191, 195, 126, 255);
+            }
         }
         else if (angle >= 60 && angle < 120)
         {
-            _selectedType = Transformation.TypeOfTransformation.Rame;
-            ResetColor();
-            _coppertImage.color = new Color32(191, 195, 126, 255);
+            if (_copper_available)
+            {
+                _selectedType = Transformation.TypeOfTransformation.Rame;    
+                _copperImage.color = new Color32(191, 195, 126, 255);
+            }
+            
         }
         else if (angle >= 120 && angle < 180)
         {
-            _selectedType = Transformation.TypeOfTransformation.Ghiaccio;
-            ResetColor();
-            _iceImage.color = new Color32(191, 195, 126, 255);
+            if (_ice_available)
+            {
+                _selectedType = Transformation.TypeOfTransformation.Ghiaccio;
+                _iceImage.color = new Color32(191, 195, 126, 255);
+            }
         }
         else if (angle >= 180 && angle < 240)
         {
-            _selectedType = Transformation.TypeOfTransformation.Colla;
-            ResetColor();
-            _glueImage.color = new Color32(191, 195, 126, 255);
+            if (_glue_available)
+            {
+                _selectedType = Transformation.TypeOfTransformation.Colla;
+                _glueImage.color = new Color32(191, 195, 126, 255);
+            }
         }
         else if (angle >= 240 && angle < 300)
         {
-            _selectedType = Transformation.TypeOfTransformation.Carta;
-            ResetColor();
-            _paperImage.color = new Color32(191, 195, 126, 255);
+            if (_paper_available)
+            {
+                _selectedType = Transformation.TypeOfTransformation.Carta;
+                _paperImage.color = new Color32(191, 195, 126, 255);
+            }
         }
         else
         {
             _selectedType = Transformation.TypeOfTransformation.Default;
-            ResetColor();
             _defaultImage.color = new Color32(191, 195, 126, 255);
         }
 
@@ -91,13 +132,17 @@ public class TransformationMenu : MonoBehaviour
          * Reset dei colori delle immagini delle trasformazioni.
          * 
          */
-        
         _defaultImage.color = new Color32(255,255,255,255);
-        _rubberImage.color = new Color32(255,255,255,255);
-        _coppertImage.color = new Color32(255,255,255,255);
-        _iceImage.color = new Color32(255,255,255,255);
-        _glueImage.color = new Color32(255,255,255,255);
-        _paperImage.color = new Color32(255,255,255,255);
+        if (_rubber_available)
+            _rubberImage.color = new Color32(255,255,255,255);
+        if (_copper_available)
+            _copperImage.color = new Color32(255,255,255,255);
+        if (_ice_available)
+            _iceImage.color = new Color32(255,255,255,255);
+        if (_glue_available)
+            _glueImage.color = new Color32(255,255,255,255);
+        if (_paper_available)
+            _paperImage.color = new Color32(255,255,255,255);
     }
     
     public void Open()
@@ -110,7 +155,6 @@ public class TransformationMenu : MonoBehaviour
         GameEvent.isChoosingTransformation = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        //rallenta il gioco
     }
 
     public void Close()
@@ -125,5 +169,38 @@ public class TransformationMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         //torna alla velocita di gioco normale
+    }
+
+    private void EnableTransformation(string type_of_transformation)
+    {
+        /*
+         * Abilito una determinata trasformazione
+         * 
+         */
+        if (type_of_transformation == "gomma")
+        {
+            _rubber_available = true;
+            _rubberImage.color = new Color32(255,255,255,255);
+        }
+        else if (type_of_transformation == "rame")
+        {
+            _copper_available = true;
+            _copperImage.color = new Color32(255,255,255,255);
+        }
+        else if (type_of_transformation == "ghiaccio")
+        {
+            _ice_available = true;
+            _iceImage.color = new Color32(255,255,255,255);
+        }
+        else if (type_of_transformation == "colla")
+        {
+            _glue_available = true;
+            _glueImage.color = new Color32(255,255,255,255);
+        }
+        else if (type_of_transformation == "carta")
+        {
+            _paper_available = true;
+            _paperImage.color = new Color32(255,255,255,255);
+        }
     }
 }

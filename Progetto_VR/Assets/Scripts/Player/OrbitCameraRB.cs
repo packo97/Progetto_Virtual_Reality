@@ -75,7 +75,7 @@ public class OrbitCameraRB : MonoBehaviour
         Vector3 lookDirection = lookRotation * Vector3.forward;
         float distance = Vector3.Distance(transform.position, target.position);
 
-        Debug.DrawRay(target.position, -lookDirection * distance, Color.green);
+        //Debug.DrawRay(target.position, -lookDirection * distance, Color.green);
 
         if (Physics.SphereCast(target.position, 1.5f, -lookDirection, out RaycastHit hit, distance))
         {

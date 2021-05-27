@@ -22,8 +22,8 @@ public class UIController : MonoBehaviour
         Messenger.AddListener(GameEvent.OPEN_MENU_TRANSFORMATION, OpenMenuTransformation);
         Messenger.AddListener(GameEvent.CLOSE_MENU_TRANSFORMATION, CloseMenuTransformation);
         
-        Messenger<CrateController.Contenuto,string>.AddListener(GameEvent.OPEN_CRATE, OpenCrate);
-        Messenger.AddListener(GameEvent.CLOSE_CRATE, CloseCrate);
+        Messenger<CrateController.Contenuto,string>.AddListener(GameEvent.OPEN_CRATE, OpenChatPanel);
+        Messenger.AddListener(GameEvent.CLOSE_CRATE, CloseChatPanel);
     }
 
     private void OnDestroy()
@@ -35,8 +35,8 @@ public class UIController : MonoBehaviour
         Messenger.RemoveListener(GameEvent.OPEN_MENU_TRANSFORMATION, OpenMenuTransformation);
         Messenger.RemoveListener(GameEvent.CLOSE_MENU_TRANSFORMATION, CloseMenuTransformation);
         
-        Messenger<CrateController.Contenuto,string>.RemoveListener(GameEvent.OPEN_CRATE, OpenCrate);
-        Messenger.RemoveListener(GameEvent.CLOSE_CRATE, CloseCrate);
+        Messenger<CrateController.Contenuto,string>.RemoveListener(GameEvent.OPEN_CRATE, OpenChatPanel);
+        Messenger.RemoveListener(GameEvent.CLOSE_CRATE, CloseChatPanel);
 
     }
     
@@ -111,16 +111,28 @@ public class UIController : MonoBehaviour
 
     private void OpenMenuTransformation()
     {
+        /*
+         * Apro il menu delle trasformazioni
+         * 
+         */
         _transformationMenu.Open();
     }
 
     private void CloseMenuTransformation()
     {
+        /*
+         * Chiudo il menu delle trasformazioni
+         * 
+         */
         _transformationMenu.Close();
     }
 
-    private void OpenCrate(CrateController.Contenuto contenuto ,string testo)
+    private void OpenChatPanel(CrateController.Contenuto contenuto ,string testo)
     {
+        /*
+         * A
+         */
+        
         _chatPanel.Open();
         _chatPanel.ChangeText(testo);
 
@@ -142,7 +154,7 @@ public class UIController : MonoBehaviour
         }
     }
 
-    private void CloseCrate()
+    private void CloseChatPanel()
     {
         _chatPanel.Close();
         _chatPanel.ChangeText("");
