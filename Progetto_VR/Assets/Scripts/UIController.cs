@@ -10,12 +10,15 @@ public class UIController : MonoBehaviour
     [SerializeField] private Slider _stickTimeSlider;
     [SerializeField] private TransformationMenu _transformationMenu;
     [SerializeField] private ChatPanel _chatPanel;
+    [SerializeField] private GameObject _gameOver;
     
     private int lives;
     
     void Awake()
     {
         Messenger.AddListener(GameEvent.PLAYER_DIE, OnPlayerDie);
+        Messenger.AddListener(GameEvent.GAME_OVER, OpenGameOverPanel);
+        
         Messenger<float>.AddListener(GameEvent.ON_STICK_TIME, OnStickTime);
         Messenger.AddListener(GameEvent.OFF_STICK_TIME, OffStickTime);
         Messenger.AddListener(GameEvent.DECREASE_STICK_TIME, DecreaseStickTime);
@@ -29,6 +32,8 @@ public class UIController : MonoBehaviour
     private void OnDestroy()
     {
         Messenger.RemoveListener(GameEvent.PLAYER_DIE, OnPlayerDie);
+        Messenger.RemoveListener(GameEvent.GAME_OVER, OpenGameOverPanel);
+        
         Messenger<float>.RemoveListener(GameEvent.ON_STICK_TIME, OnStickTime);
         Messenger.RemoveListener(GameEvent.OFF_STICK_TIME, OffStickTime);
         Messenger.RemoveListener(GameEvent.DECREASE_STICK_TIME, DecreaseStickTime);
@@ -47,6 +52,7 @@ public class UIController : MonoBehaviour
         _stickTimeSlider.gameObject.SetActive(false);
         _transformationMenu.Close();
         _chatPanel.Close();
+        _gameOver.SetActive(false);
     }
 
     // Update is called once per frame
@@ -158,5 +164,10 @@ public class UIController : MonoBehaviour
     {
         _chatPanel.Close();
         _chatPanel.ChangeText("");
+    }
+
+    private void OpenGameOverPanel()
+    {
+        _gameOver.SetActive(true);
     }
 }

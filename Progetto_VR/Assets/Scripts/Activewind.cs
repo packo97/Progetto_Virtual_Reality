@@ -12,9 +12,9 @@ public class Activewind : MonoBehaviour
     {
         if (ToEnable != null)
             for (int i = 0; i < ToEnable.Length; i++)
-                ToEnable[i].SetActive(true);
+                ToEnable[i].GetComponent<WindForce>().enabled= true;
         if (ToDisable != null)
             for (int i = 0; i < ToDisable.Length; i++)
-                ToDisable[i].SetActive(false);
+                ToDisable[i].GetComponent<WindForce>().enabled=false;
     }
 }

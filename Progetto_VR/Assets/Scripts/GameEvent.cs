@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameEvent : MonoBehaviour
 {
     public const string PLAYER_DIE = "PLAYER_DIE";
+    public const string GAME_OVER = "GAME_OVER";
     
     public const string ON_STICK_TIME = "ON_STICK_TIME";
     public const string OFF_STICK_TIME = "OFF_STICK_TIME";

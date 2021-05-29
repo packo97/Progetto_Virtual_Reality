@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -62,6 +63,17 @@ public class PlayerController : MonoBehaviour
         isClimbing = false;
         isJumping = false;
         isDied = false;
+        
+        
+        /*
+         * Per evitare problemi con frame alti
+         */
+        
+        #if UNITY_EDITOR
+        QualitySettings.vSyncCount = 0;  // VSync must be disabled
+        Application.targetFrameRate = 60;
+        #endif
+        
     }
 
     // Update is called once per frame
@@ -160,12 +172,9 @@ public class PlayerController : MonoBehaviour
              * Evito che la capsula scivoli sulle scale
              * 
              */
-            Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1f);
-            //Debug.Log(hit.normal);
-            if (hit.normal.y > 0 && hit.normal.y < 1)
-            {
+            
+            if (groundHit.collider != null && groundHit.collider.tag.Equals("Stair"))
                 _rigidbody.isKinematic = true;
-            }
         }
         
         //QUESTIONE SLOP SURFACE
@@ -258,24 +267,40 @@ public class PlayerController : MonoBehaviour
         if (!isDied)
         {
             _lives -= 1;
+            
+            
             isDied = true;
-            Messenger.Broadcast(GameEvent.PLAYER_DIE);
-            //Debug.Log("Life " + _lives);
-            if (typeOfKill == Kill.TypeOfKill.Electricity)
-                StartCoroutine(KillTime());
+            if (_lives > 0)
+            {
+                Messenger.Broadcast(GameEvent.PLAYER_DIE);
+                Debug.Log("Life " + _lives);
+                if (typeOfKill == Kill.TypeOfKill.Electricity)
+                    StartCoroutine(KillTime());
+                else
+                {
+                    transform.position = respawnPosition;
+                    isDied = false;
+                }    
+            }
             else
             {
-                transform.position = respawnPosition;
-                isDied = false;
+                Messenger.Broadcast(GameEvent.PLAYER_DIE);
+                Messenger.Broadcast(GameEvent.GAME_OVER);
+                StartCoroutine(BackToStartScene());
             }
+            
         }
-        
+    }
 
+    private IEnumerator BackToStartScene()
+    {
+        yield return new WaitForSecondsRealtime(10);
+        SceneManager.LoadScene("StartScene");
     }
 
     private IEnumerator KillTime()
     {
-        yield return new WaitForSecondsRealtime(8);
+        yield return new WaitForSecondsRealtime(6);
         transform.position = respawnPosition;
         isDied = false;
     }

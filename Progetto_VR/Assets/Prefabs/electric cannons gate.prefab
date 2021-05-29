@@ -1,17 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &7564948159877485576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 77793146062247264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da79e4964c1394a4d9970898904df234, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1046370936503390552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22,6 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f58d49df90be56d05a4cd3779bfda39c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7564948159877485576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77793146062247264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da79e4964c1394a4d9970898904df234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &371258278529532419
@@ -413,6 +413,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &5584346356838319195
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5103256589784031084}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 9, z: 13.5}
+  m_Center: {x: 0, y: -3, z: 6.8}
 --- !u!114 &1630660548058638216
 MonoBehaviour:
   m_ObjectHideFlags: 0

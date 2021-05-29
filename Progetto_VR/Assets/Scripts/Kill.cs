@@ -39,18 +39,30 @@ public class Kill : MonoBehaviour
                 playerController.Hurt(TypeOfKill.Water);
             }
             
-           
+            
+            
         }
     }
 
+    /*
     private void OnParticleCollision(GameObject other)
     {
-        /*
+        
          * 1 - Se collide con particelle che sono taggate cond "Die" -> comunica la Player Controller di essere
          * stato colpito.
-         */
+         
         PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
         if (other.tag.Equals("Player") && (other.GetComponent<Transformation>().transf != Transformation.TypeOfTransformation.Gomma && other.GetComponent<Transformation>().transf != Transformation.TypeOfTransformation.Rame))
+        {
+            playerController.Hurt(TypeOfKill.Electricity);
+        }
+    }
+    */
+
+    private void OnTriggerEnter(Collider other)
+    {
+        PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
+        if (other.gameObject.tag.Equals("Player") && (other.gameObject.GetComponent<Transformation>().transf != Transformation.TypeOfTransformation.Gomma && other.gameObject.GetComponent<Transformation>().transf != Transformation.TypeOfTransformation.Rame))
         {
             playerController.Hurt(TypeOfKill.Electricity);
         }

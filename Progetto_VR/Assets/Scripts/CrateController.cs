@@ -123,6 +123,10 @@ public class CrateController : MonoBehaviour
          */
         
         isOpen = false;
+        
+        if (contenuto == Contenuto.Vita)
+            life.SetActive(false);
+        
         if (contenuto == Contenuto.Vita || contenuto == Contenuto.ChipGomma || contenuto == Contenuto.ChipRame || contenuto == Contenuto.ChipGhiaccio || contenuto == Contenuto.ChipColla || contenuto == Contenuto.ChipCarta)
             contenuto = Contenuto.Vuota;
         StartCoroutine(CloseAnimation());

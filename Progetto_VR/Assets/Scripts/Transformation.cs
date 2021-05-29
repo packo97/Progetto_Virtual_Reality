@@ -71,13 +71,15 @@ public class Transformation : MonoBehaviour
 
         if (transf == TypeOfTransformation.Carta)
         {
-            player.SetJumpForce(50);
+            player.SetJumpForce(20);
             _rigidbody.mass = 1;
+            _rigidbody.drag = 7;
         }
         else
         {
-            player.SetJumpForce(30);
+            player.SetJumpForce(40);
             _rigidbody.mass = 5;
+            _rigidbody.drag = 1;
         }
         
         _electricBehavior.Reset();
@@ -266,7 +268,7 @@ public class Transformation : MonoBehaviour
                     transform.position = playerController.getRespawnPosition();
                     playerController.Hurt(Kill.TypeOfKill.Fall);
                 }
-                _fallPoint = _collisionPoint;
+                
             }
                 
         }
@@ -317,6 +319,7 @@ public class Transformation : MonoBehaviour
                }
             }
         }
+        _fallPoint = _collisionPoint;
     }
     
     private void OnCollisionExit(Collision collision)

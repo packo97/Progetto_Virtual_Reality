@@ -23,12 +23,15 @@ public class PlatePressureForRotation : MonoBehaviour
 
         foreach (GameObject obj in gameObjects)
         {
-            if (obj.GetComponent<Rotation>())
+            if (obj.GetComponent<Rotation>() && other.gameObject.GetComponent<PlayerController>())
                 StartCoroutine(obj.GetComponent<Rotation>().ObjectRotation());
         }    
         
             
     }
-    
-    
+
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log("exit");
+    }
 }

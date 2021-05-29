@@ -9,6 +9,9 @@ public class PlatePressure : MonoBehaviour
 
     [SerializeField]
     private GameObject door;
+
+    [SerializeField]
+    private bool stayopen = false;
     
     [SerializeField]
     private Material _triggerOn;
@@ -57,7 +60,7 @@ public class PlatePressure : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         Debug.Log("bye");
-        if (pressure == true && other.GetType() != typeof(SphereCollider))
+        if (pressure == true && other.GetType() != typeof(SphereCollider) && !stayopen)
         {
             pressure = false;
             door.GetComponent<DoorInput>().CloseDoor();
