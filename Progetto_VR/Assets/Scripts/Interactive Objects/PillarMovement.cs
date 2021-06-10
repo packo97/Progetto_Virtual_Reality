@@ -19,6 +19,7 @@ public class PillarMovement : MonoBehaviour
     [SerializeField] private float constantForceValue;
     private Vector3 direction;
     
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -90,6 +91,7 @@ public class PillarMovement : MonoBehaviour
             }
         }
             
+        GetComponent<AudioSource>().Play();
     }
 
     private void OnCollisionEnter(Collision other)
@@ -105,6 +107,7 @@ public class PillarMovement : MonoBehaviour
             target = "start";
             isMoving = false;
         }
+        GetComponent<AudioSource>().Stop();
     }
     
     public bool IsMoving()

@@ -44,5 +44,7 @@ public class PlatePressureForElectric : MonoBehaviour
             electric_cannon3.GetComponent<ElectricBehavior>().ElectricSwitch();
         if(electric_cannon4)
             electric_cannon4.GetComponent<ElectricBehavior>().ElectricSwitch();
+        
+        GetComponent<AudioSource>().Play();
     }
 }

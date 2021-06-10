@@ -27,11 +27,7 @@ public class PlatePressureForRotation : MonoBehaviour
                 StartCoroutine(obj.GetComponent<Rotation>().ObjectRotation());
         }    
         
-            
+        GetComponent<AudioSource>().Play();    
     }
-
-    private void OnTriggerExit(Collider other)
-    {
-        Debug.Log("exit");
-    }
+    
 }

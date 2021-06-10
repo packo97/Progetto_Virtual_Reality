@@ -53,6 +53,7 @@ public class PlatePressure : MonoBehaviour
             Material[] materials = _render.materials;
             materials[2] = _triggerOn;
             _render.materials = materials;
+            GetComponent<AudioSource>().Play();
         }
     }
 
@@ -68,6 +69,8 @@ public class PlatePressure : MonoBehaviour
             Material[] materials = _render.materials;
             materials[2] = _triggerOff;
             _render.materials = materials;
+            
+            GetComponent<AudioSource>().Play();
         }
     }
 }

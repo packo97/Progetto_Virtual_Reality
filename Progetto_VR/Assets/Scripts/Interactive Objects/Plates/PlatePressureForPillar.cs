@@ -38,5 +38,7 @@ public class PlatePressureForPillar : MonoBehaviour
             {
                 pillarMovement.Movement();
             }
+        
+        GetComponent<AudioSource>().Play();
     }
 }

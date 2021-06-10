@@ -39,6 +39,8 @@ public class Rotation : MonoBehaviour
                 yield return null;
             }
         }
+        
+        GetComponent<AudioSource>().Play();
     }
     
    

@@ -27,6 +27,8 @@ public class PlateForWireCircuit : MonoBehaviour
         {
             _wireCircuit.TurnOffWire();
         }
+        
+        GetComponent<AudioSource>().Play();
     }
 
 

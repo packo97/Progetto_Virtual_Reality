@@ -52,6 +52,8 @@ public class WindForce : MonoBehaviour
         transform.GetChild(9).gameObject.SetActive(false);
         if (GetComponentInParent<SlideInput>()!=null)
             GetComponentInParent<SlideInput>().CloseDoor();
+        
+     
     }
 
 
@@ -62,9 +64,9 @@ public class WindForce : MonoBehaviour
         GetComponent<BoxCollider>().enabled = true;
         transform.GetChild(9).gameObject.SetActive(true);
         if (GetComponentInParent<SlideInput>()!=null){
-            GetComponentInParent<SlideInput>().OpenDoor(); 
-            Debug.Log("enable");
-        }      
+            GetComponentInParent<SlideInput>().OpenDoor();
+        }
+        
     }
     
 }

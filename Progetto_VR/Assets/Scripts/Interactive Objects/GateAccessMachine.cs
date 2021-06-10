@@ -20,6 +20,11 @@ public class GateAccessMachine : MonoBehaviour
     [SerializeField] private Material defaultMaterial;
     [SerializeField] private Material closedMaterial;
     
+    
+    
+    [SerializeField] private AudioClip wrongCode;
+    [SerializeField] private AudioClip correctCode;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -113,6 +118,8 @@ public class GateAccessMachine : MonoBehaviour
                 codice.color = Color.green;
                 codice.color = Color.green;
                 ChangeMaterial(correctMaterial);
+                
+                GetComponent<AudioSource>().PlayOneShot(correctCode);
             }
             else
             {
@@ -121,6 +128,8 @@ public class GateAccessMachine : MonoBehaviour
                 info.color = Color.red;
                 codice.color = Color.red;
                 ChangeMaterial(wrongMaterial);
+                
+                GetComponent<AudioSource>().PlayOneShot(wrongCode);
             }
         }
     }
