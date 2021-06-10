@@ -41,6 +41,15 @@ public class PlayerController : MonoBehaviour
 
     private ContactPoint _contactPoint;
     
+    [SerializeField] private AudioClip hurtSound;
+    [SerializeField] private float footstepLength;
+    [SerializeField] private AudioClip footstep;
+    [SerializeField] private AudioClip footstepWater;
+    
+    private bool step;
+    public bool onWater;
+
+    private int Nroom;
     private void Awake()
     {
         Messenger.AddListener(GameEvent.LIFE_UP, LifeUp);
@@ -73,7 +82,10 @@ public class PlayerController : MonoBehaviour
         QualitySettings.vSyncCount = 0;  // VSync must be disabled
         Application.targetFrameRate = 60;
         #endif
-        
+
+
+        step = true;
+        onWater = false;
     }
 
     // Update is called once per frame
@@ -103,7 +115,7 @@ public class PlayerController : MonoBehaviour
         
         //ControlMaterialPhysics();
 
-        
+        //Debug.Log(somethingIsColliding);
     }
 
     private void Move()
@@ -112,6 +124,8 @@ public class PlayerController : MonoBehaviour
          * Muove sulle assi  x e z considerando la rotazione attuale
          */
         
+        float adjustedFootstepLength = footstepLength;
+        
         Vector3 movement = Vector3.zero;
         float horInput = Input.GetAxis("Horizontal");
         float vertInput = Input.GetAxis("Vertical");
@@ -119,7 +133,7 @@ public class PlayerController : MonoBehaviour
         if (horInput != 0 || vertInput != 0)
         {
             _rigidbody.isKinematic = false;
-            
+            /*
             Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1f);
             //soluzione per salire le scale
             if (hit.normal.y > 0 && hit.normal.y < 1)
@@ -129,11 +143,12 @@ public class PlayerController : MonoBehaviour
             else
             {
                 _rigidbody.useGravity = true;
-            }
+            }*/
             
             if (Input.GetKey(KeyCode.LeftShift) && !isJumping)
             {
                 currentSpeed = groundSpeed * 2;
+                adjustedFootstepLength= footstepLength/2;
             }
             else if (Input.GetKey(KeyCode.LeftShift) && isJumping)
             {
@@ -165,6 +180,38 @@ public class PlayerController : MonoBehaviour
             //rotazione lenta
             Quaternion direction = Quaternion.LookRotation(movement);
             transform.rotation = Quaternion.Lerp(transform.rotation, direction, rotSpeed * Time.deltaTime);
+            
+            movement *= Time.deltaTime;
+            
+            
+            Vector3 surface_normal = groundHit.normal;
+            
+            Vector3 movement_XZ = new Vector3(movement.x,0, movement.z);
+            Vector3 rb_velocity_XZ = new Vector3(_rigidbody.velocity.x,0, _rigidbody.velocity.z);
+            Vector3 forceMovement = movement_XZ.normalized * currentSpeed - rb_velocity_XZ;
+            
+            /*
+             * Per le slope surface potrebbe aiutare
+             */
+            //Vector3 temp = Vector3.Cross(surface_normal, forceMovement);
+            //Vector3 forceMovementWithSlope = Vector3.Cross(temp, surface_normal);
+            //movement *= Time.deltaTime;
+            
+            //la seguente riga non funziona benissimo con le collisioni
+            //_rigidbody.MovePosition(transform.position + movement);
+            
+            _rigidbody.AddForce(forceMovement, ForceMode.VelocityChange);
+            
+            if(step && !isJumping){
+                if(!onWater){
+                    GetComponent<AudioSource>().PlayOneShot(footstep);
+                    StartCoroutine(WaitForFootSteps(adjustedFootstepLength));
+                }
+                else{
+                    GetComponent<AudioSource>().PlayOneShot(footstepWater);
+                    StartCoroutine(WaitForFootSteps(adjustedFootstepLength));
+                }
+            }
         }
         else
         {
@@ -186,10 +233,17 @@ public class PlayerController : MonoBehaviour
         myDirection *= Time.deltaTime;
         Debug.Log("Unity: " + myDirection);
         */
-        
-        movement *= Time.deltaTime;
-        _rigidbody.MovePosition(transform.position + movement);
+
     }
+    
+    private IEnumerator WaitForFootSteps(float stepLength)
+    {
+        Debug.Log("entro wait");
+        step=false;
+        yield return new WaitForSeconds(stepLength);
+        step=true;
+    }
+    
     
     private void Jump()
     {
@@ -232,9 +286,14 @@ public class PlayerController : MonoBehaviour
         float colliderHeight = _capsuleCollider.height + _capsuleCollider.radius * 2;
         Ray ray = new Ray(transform.position + new Vector3(0, colliderHeight / 2, 0), Vector3.down);
         
-        if (Physics.Raycast(ray, out groundHit, (colliderHeight / 2) + 0.6f))
+        if (Physics.Raycast(ray, out groundHit, (colliderHeight / 2) + 1f))
         {
             //Debug.Log("Grounded");
+            return true;
+        }
+
+        if (somethingIsColliding)
+        {
             return true;
         }
         
@@ -280,6 +339,8 @@ public class PlayerController : MonoBehaviour
                 {
                     transform.position = respawnPosition;
                     isDied = false;
+                    
+                    LoadDynamicOBJ();
                 }    
             }
             else
@@ -303,6 +364,8 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSecondsRealtime(6);
         transform.position = respawnPosition;
         isDied = false;
+        
+        LoadDynamicOBJ();
     }
 
     private void LifeUp()
@@ -360,6 +423,27 @@ public class PlayerController : MonoBehaviour
     {
         return isDied;
     }
-    
-    
+
+
+    private bool somethingIsColliding;
+    private void OnCollisionStay(Collision other)
+    {
+        somethingIsColliding = true;
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        somethingIsColliding = false;
+    }
+
+    public void SetRoom(int r)
+    {
+        Nroom = r;
+    }
+
+    public void LoadDynamicOBJ()
+    {
+        GameObject tmp = GameObject.FindWithTag("Room_"+Nroom);
+        tmp.GetComponent<LoadObject>().ReloadRoom();
+    }
 }

@@ -8,7 +8,7 @@ using Vector3 = UnityEngine.Vector3;
 
 public class OrbitCameraRB : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    public Transform target;
     
     public float rotSpeed = 1.5f;
     private float _rotY;
@@ -96,4 +96,5 @@ public class OrbitCameraRB : MonoBehaviour
             }
         }
     }
+    
 }

@@ -52,3 +52,14 @@ Update Mode: updateDependencies
 
 The following packages were updated:
   com.unity.ide.visualstudio from version 2.0.5 to 2.0.7
+
+=== Sat May 29 19:45:10 2021
+
+Packages were changed.
+Update Mode: mergeDefaultDependencies
+
+The following packages were added:
+  com.unity.cinemachine@2.3.4
+  com.unity.ext.nunit@1.0.0
+  com.unity.postprocessing@2.2.2
+  com.unity.recorder@2.0.3-preview.1

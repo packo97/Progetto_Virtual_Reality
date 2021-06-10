@@ -10,11 +10,17 @@ TagManager:
   - Climbing
   - Platform
   - Stair
+  - PlayerEyes
+  - Room_5
+  - Room_3
+  - Room_4
+  - Room_6
+  - Room_7
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Friend Layer
   - Water
   - UI
   - 
