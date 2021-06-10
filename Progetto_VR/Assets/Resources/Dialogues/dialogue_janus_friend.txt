@@ -1,0 +1,7 @@
+Janus	E tu chi sei?
+Friend	Sono arrivato prima di te qui! Tu chi sei?
+Janus	Io sono Janus e sto per uscire da questo laboratorio
+Janus	grazie alle mie trasformazioni
+Friend	Le tue trasformazioni non saranno abbastanza per arrivare all'uscita.
+Friend	E' il momento di unire le forze!
+End	End
