@@ -1,0 +1,4 @@
+Scientist3	Il tuo amico rosso è stavo più bravo di te.
+Janus	Siamo arrivati insieme.
+Janus	Meglio due robot intelligenti che uno solo.
+End	End

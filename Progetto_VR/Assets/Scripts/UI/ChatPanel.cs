@@ -10,29 +10,14 @@ public class ChatPanel : MonoBehaviour
     [SerializeField] private Image image;
     [SerializeField] private Sprite janusSprite;
     [SerializeField] private Sprite friendSprite;
-    
-    private int indexSentence;
+    [SerializeField] private Sprite scientist1Sprite;
+    [SerializeField] private Sprite scientist2Sprite;
+    [SerializeField] private Sprite scientist3Sprite;
 
-    private List<(string, string)> dialogue;
+
     // Start is called before the first frame update
     void Start()
     {
-        indexSentence = 0;
-        string path = "Assets/Resources/Dialogues/dialogue_janus_friend.txt";
-        string[] lines = File.ReadAllLines(path);
-        
-        dialogue = new List<(string, string)>();
-        foreach (string line in lines)
-        {
-            //Debug.Log(line);
-            string[] split = line.Split('\t');
-            (string, string) whoTalk_sentence = (split[0], split[1]);
-            //Debug.Log(whoTalk_sentence.Item1 + ": " + whoTalk_sentence.Item2);
-            dialogue.Add(whoTalk_sentence);
-        }
-        
-        
-            
     }
 
     // Update is called once per frame
@@ -77,28 +62,33 @@ public class ChatPanel : MonoBehaviour
 
     }
 
-    public void NextSentence()
+    public void NextSentence((string, string) sentence)
     {
-        if (dialogue[indexSentence].Item2.Equals("End"))
+
+        if (sentence.Item2.Equals("End"))
         {
             gameObject.SetActive(false);
             DoublePlayerController.SetDoublePlayerMode(true);
         }
         else
         {
-            if (dialogue[indexSentence].Item1.Equals("Janus"))
+            if (sentence.Item1.Equals("Janus"))
                 image.sprite = janusSprite;
-            else if (dialogue[indexSentence].Item1.Equals("Friend"))
+            else if (sentence.Item1.Equals("Friend"))
                 image.sprite = friendSprite;
+            else if (sentence.Item1.Equals("Scientist1"))
+                image.sprite = scientist1Sprite;
+            else if (sentence.Item1.Equals("Scientist2"))
+                image.sprite = scientist2Sprite;
+            else if (sentence.Item1.Equals("Scientist3"))
+                image.sprite = scientist3Sprite;
+       
+                
 
             image.preserveAspect = true;
-            
-            testo.text = dialogue[indexSentence].Item2;
-            
-            if (indexSentence < dialogue.Count - 1)
-                indexSentence++;
+
+            testo.text = sentence.Item2;
         }
-        
     }
-    
+
 }

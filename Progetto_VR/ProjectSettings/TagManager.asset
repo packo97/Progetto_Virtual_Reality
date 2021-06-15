@@ -16,6 +16,7 @@ TagManager:
   - Room_4
   - Room_6
   - Room_7
+  - NextDialogue
   layers:
   - Default
   - TransparentFX

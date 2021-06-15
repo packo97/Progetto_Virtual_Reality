@@ -1,0 +1,7 @@
+Friend	Stiamo andando bene!
+Janus	Abbiamo quasi finito.
+Friend	Quest'ultima stanza non mi convince
+Friend	Deve esserci qualcosa di nascosto
+Friend	Dovrei provare a cercare qualcosa
+Friend	utilizzando la mia super vista
+End	End

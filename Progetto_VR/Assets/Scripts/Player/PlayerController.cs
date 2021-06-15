@@ -238,7 +238,6 @@ public class PlayerController : MonoBehaviour
     
     private IEnumerator WaitForFootSteps(float stepLength)
     {
-        Debug.Log("entro wait");
         step=false;
         yield return new WaitForSeconds(stepLength);
         step=true;

@@ -40,11 +40,17 @@ public class DoorInput : MonoBehaviour
 
     public void OpenDoor()
     {
+        if (!isOpen)
+            GetComponent<AudioSource>().Play();
+
         isOpen = true;
     }
 
     public void CloseDoor()
     {
+        if(isOpen)
+            GetComponent<AudioSource>().Play();
+
         isOpen = false;
     }
 }

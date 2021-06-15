@@ -199,9 +199,11 @@ public class InteractionWithObject : MonoBehaviour
                     break;
                 }
 
-                if (hitCollider.GetComponent<FriendPlayer>())
+                if (hitCollider.GetComponent<FriendPlayer>() && hitCollider.GetComponent<Dialogue>())
                 {
-                    Messenger.Broadcast(GameEvent.NEXT_SENTENCE);
+                    (string, string) sentence = hitCollider.GetComponent<Dialogue>().GetCurrentSentence();
+                    Messenger<(string, string)>.Broadcast(GameEvent.NEXT_SENTENCE, sentence);
+                    hitCollider.GetComponent<Dialogue>().UpdateCurrentIndex();
                 }
                 
             }

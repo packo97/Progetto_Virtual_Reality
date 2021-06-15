@@ -41,10 +41,14 @@ public class PlatformPressable : MonoBehaviour
         {
             if (!active)
             {
-                if (other.GetComponent<PlayerController>())
+                if (other.GetComponent<PlayerController>()){
                     materials[0] = pressedMaterialPlayer1;
-                else if (other.GetComponent<FriendPlayer>())
+                    GetComponent<AudioSource>().Play();
+                }
+                else if (other.GetComponent<FriendPlayer>()){
+                    GetComponent<AudioSource>().Play();
                     materials[0] = pressedMaterialPlayer2;
+                }
                 active = true;
             }
             else

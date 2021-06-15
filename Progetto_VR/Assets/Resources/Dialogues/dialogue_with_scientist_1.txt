@@ -1,0 +1,3 @@
+Scientist1	Ci hai messo un po' di tempo per arrivare
+Janus	Non ho voluto mostrare tutte le mie abilità
+End	End

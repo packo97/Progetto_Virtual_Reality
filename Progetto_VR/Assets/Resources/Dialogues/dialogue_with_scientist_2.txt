@@ -1,0 +1,4 @@
+Scientist2	Non li ascoltare, sono solo invidiosi delle tue trasformazioni.
+Janus	Grazie, ma sono un Robot non ho sentimenti.
+Janus	I loro commenti non mi fanno nè caldo nè freddo
+End	End

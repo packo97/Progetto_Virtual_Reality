@@ -29,7 +29,7 @@ public class UIController : MonoBehaviour
         Messenger<CrateController.Contenuto,string>.AddListener(GameEvent.OPEN_CRATE, OpenChatPanel);
         Messenger.AddListener(GameEvent.CLOSE_CRATE, CloseChatPanel);
         
-        Messenger.AddListener(GameEvent.NEXT_SENTENCE, NextSentence);
+        Messenger<(string, string)>.AddListener(GameEvent.NEXT_SENTENCE, NextSentence);
     }
 
     private void OnDestroy()
@@ -47,7 +47,7 @@ public class UIController : MonoBehaviour
         Messenger.RemoveListener(GameEvent.CLOSE_CRATE, CloseChatPanel);
 
         
-        Messenger.RemoveListener(GameEvent.NEXT_SENTENCE, NextSentence);
+        Messenger<(string, string)>.RemoveListener(GameEvent.NEXT_SENTENCE, NextSentence);
     }
     
     // Start is called before the first frame update
@@ -177,9 +177,9 @@ public class UIController : MonoBehaviour
         _gameOver.SetActive(true);
     }
 
-    private void NextSentence()
+    private void NextSentence((string, string) sentence)
     {
         _chatPanel.Open();
-        _chatPanel.NextSentence();
+        _chatPanel.NextSentence(sentence);
     }
 }

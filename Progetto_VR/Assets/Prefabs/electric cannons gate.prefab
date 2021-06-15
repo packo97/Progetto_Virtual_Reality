@@ -386,6 +386,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5103112008866292957}
+  - component: {fileID: 7165874711371291832}
   m_Layer: 0
   m_Name: electric cannons gate
   m_TagString: Untagged
@@ -413,6 +414,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &7165874711371291832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5103112008866292956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da79e4964c1394a4d9970898904df234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &5584346356838319195
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2532,6 +2545,10 @@ PrefabInstance:
     - target: {fileID: 3187711569515516447, guid: 623a94a8efb2adc44911bc2bded7a566, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648929906360833477, guid: 623a94a8efb2adc44911bc2bded7a566, type: 3}
+      propertyPath: Loop
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5217893554082261503, guid: 623a94a8efb2adc44911bc2bded7a566, type: 3}
       propertyPath: m_RootOrder
