@@ -77,11 +77,12 @@ public class PlayerController : MonoBehaviour
         /*
          * Per evitare problemi con frame alti
          */
-        
+        /*
         #if UNITY_EDITOR
         QualitySettings.vSyncCount = 0;  // VSync must be disabled
         Application.targetFrameRate = 60;
         #endif
+        */
 
 
         step = true;

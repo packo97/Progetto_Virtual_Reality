@@ -10,121 +10,111 @@ public class DeviceCircuit : MonoBehaviour
     [SerializeField] private WireCircuit[] _wireCircuitsIN;
     [SerializeField] private WireCircuit[] _wireCircuitsOUT;
 
-    //private MeshRenderer _meshRenderer;
+   
 
     [SerializeField] private Material deviceMaterialOn;
     [SerializeField] private Material deviceMaterialOff;
 
     public bool active;
+
+    private int countActive = 0;
     // Start is called before the first frame update
     void Start()
     {
         active = false;
-        //_meshRenderer = GetComponent<MeshRenderer>();
+      
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddActivePipe()
     {
-        int countActive = 0;
-        foreach (WireCircuit wireCircuit in _wireCircuitsIN)
-        {
-            if (wireCircuit.active == true)
-                countActive++;
-        }
+        countActive++;
+        TryActiveDevice();
+    }
 
+    public void RemoveActivePipe()
+    {
+        countActive--;
+        TryActiveDevice();
+    }
+
+    public void TryActiveDevice()
+    {
         if (typeOfDevice == TypeOfDevice.AND)
         {
             if (countActive == _wireCircuitsIN.Length)
             {
-                foreach (WireCircuit wireCircuit in _wireCircuitsOUT)
-                    wireCircuit.TurnOnWire();
                 active = true;
+                TurnOnDevice();
             }
             else
             {
-                foreach (WireCircuit wireCircuit in _wireCircuitsOUT)
-                    wireCircuit.TurnOffWire();
                 active = false;
+                TurnOffDevice();
             }
         }
         else if (typeOfDevice == TypeOfDevice.OR)
         {
             if (countActive >= 1)
             {
-                foreach (WireCircuit wireCircuit in _wireCircuitsOUT)
-                    wireCircuit.TurnOnWire();
                 active = true;
+                TurnOnDevice();
             }
             else
             {
-                foreach (WireCircuit wireCircuit in _wireCircuitsOUT)
-                    wireCircuit.TurnOffWire();
                 active = false;
+                TurnOffDevice();
             }
         }
         else if (typeOfDevice == TypeOfDevice.XOR)
         {
             if (countActive % 2 != 0)
             {
-                foreach (WireCircuit wireCircuit in _wireCircuitsOUT)
-                    wireCircuit.TurnOnWire();
                 active = true;
+                TurnOnDevice();
             }
             else
             {
-                foreach (WireCircuit wireCircuit in _wireCircuitsOUT)
-                    wireCircuit.TurnOffWire();
                 active = false;
+                TurnOffDevice();
             }
         }
         else if (typeOfDevice == TypeOfDevice.NXOR)
         {
             if (countActive % 2 == 0)
             {
-                foreach (WireCircuit wireCircuit in _wireCircuitsOUT)
-                    wireCircuit.TurnOnWire();
                 active = true;
+                TurnOnDevice();
             }
             else
             {
-                foreach (WireCircuit wireCircuit in _wireCircuitsOUT)
-                    wireCircuit.TurnOffWire();
                 active = false;
+                TurnOffDevice();
             }
         }
+    }
 
-        /* if (active)
-         {
-             Material[] materials = _meshRenderer.materials;
-             materials[0] = deviceMaterialOn;
-             _meshRenderer.materials = materials;
-         }
-         else
-         {
-             Material[] materials = _meshRenderer.materials;
-             materials[0] = deviceMaterialOff;
-             _meshRenderer.materials = materials;
-         }*/
+    private void TurnOnDevice()
+    {
+        GetComponentInChildren<ParticleSystemRenderer>().material = deviceMaterialOn;
+        GetComponentInChildren<Light>().color = deviceMaterialOn.GetColor("_TintColor");
 
-        if(active)
-        {
-            GetComponentInChildren<ParticleSystemRenderer>().material = deviceMaterialOn;
-            GetComponentInChildren<Light>().color = deviceMaterialOn.GetColor("_TintColor");
-        }
-        else
-        {
-            GetComponentInChildren<ParticleSystemRenderer>().material = deviceMaterialOff;
-            GetComponentInChildren<Light>().color = deviceMaterialOff.GetColor("_TintColor");
-        }
+        foreach (WireCircuit wireCircuit in _wireCircuitsOUT)
+            wireCircuit.TurnOnWire();
+    }
 
+    public void TurnOffDevice()
+    {
+        GetComponentInChildren<ParticleSystemRenderer>().material = deviceMaterialOff;
+        GetComponentInChildren<Light>().color = deviceMaterialOff.GetColor("_TintColor");
 
-
-
-
+        foreach (WireCircuit wireCircuit in _wireCircuitsOUT)
+            wireCircuit.TurnOffWire();
+    }
+    // Update is called once per frame
+    void Update()
+    {
+    
     }
     
-    
-
 
 }

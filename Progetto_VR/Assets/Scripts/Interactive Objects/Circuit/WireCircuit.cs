@@ -6,7 +6,7 @@ public class WireCircuit : MonoBehaviour
 {
     public bool active;
     private MeshRenderer[] _meshRenderers;
-
+    [SerializeField] public DeviceCircuit Device;
     [SerializeField] private Material wireMaterialOn;
     [SerializeField] private Material wireMaterialOff;
 
@@ -33,8 +33,10 @@ public class WireCircuit : MonoBehaviour
             materials[0] = wireMaterialOn;
             meshRenderer.materials = materials;   
         }
-            
-
+        
+        if(Device!=null)
+            Device.AddActivePipe();
+        
         
     }
 
@@ -49,5 +51,8 @@ public class WireCircuit : MonoBehaviour
             materials[0] = wireMaterialOff;
             meshRenderer.materials = materials;
         }
+        if (Device != null)
+            Device.RemoveActivePipe();
+
     }
 }
