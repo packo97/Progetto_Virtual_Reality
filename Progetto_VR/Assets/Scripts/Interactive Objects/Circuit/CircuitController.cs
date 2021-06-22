@@ -18,6 +18,13 @@ public class CircuitController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
+         * Verifico il numero di device attivi.
+         * Se sono tutti attivi tranne lo special -> apro la porta 1
+         * Se sono tutti attivi -> apro la porta 2
+         * 
+         */
+        
         int countActive = 0;
         foreach (DeviceCircuit deviceCircuit in _deviceCircuits)
         {

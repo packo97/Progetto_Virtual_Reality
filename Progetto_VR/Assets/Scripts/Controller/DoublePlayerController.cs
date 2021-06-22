@@ -22,10 +22,23 @@ public class DoublePlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
+         * Switch del Player quando viene premuto il tasto TAB
+         */
+        
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             SwitchPlayer();
         }
+        
+        /*
+         *  Se devo cambiare a Janus:
+         *      - disattivo il movimento dell'amico/Janus
+         *      - attivo il movimento di Janus/amico
+         *      - modifico il target della camera
+         *      - modifico il layer della camera
+         * 
+         */
         
         if (playerActive == PlayerActive.Janus)
         {

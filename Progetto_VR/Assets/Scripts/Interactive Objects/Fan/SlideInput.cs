@@ -20,6 +20,12 @@ public class SlideInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
+         *  Sposto l'oggetto in accordo al metodo selezionato
+         * 
+         */
+        
+        
         //Up and Down
         if(isOpen == true && mod == Method.UpDownY && transform.localPosition.y < OpenLimit){
             transform.Translate(Vector3.up * (Time.deltaTime * 4));

@@ -6,20 +6,14 @@ using UnityEngine;
 public class TriggerDoor : MonoBehaviour
 {
     [SerializeField] private DoorInput door;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
+        /*
+         * Apro la porta quando si entra nell'area di trigger
+         * 
+         */
+        
         if (other.GetComponent<PlayerController>())
         {
             door.OpenDoor();
@@ -28,6 +22,11 @@ public class TriggerDoor : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        /*
+         * Chiudo la porta quando si esce dall'area di trigger
+         * 
+         */
+        
         if (other.GetComponent<PlayerController>())
         {
             door.CloseDoor();

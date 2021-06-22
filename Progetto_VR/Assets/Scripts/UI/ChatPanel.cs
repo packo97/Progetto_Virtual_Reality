@@ -66,6 +66,10 @@ public class ChatPanel : MonoBehaviour
 
     public void NextSentence((string, string) sentence)
     {
+        /*
+         * Visualizzo la prossima frase del dialogo e mostro l'immagine di chi parla
+         * 
+         */
 
         if (sentence.Item2.Equals("End"))
         {

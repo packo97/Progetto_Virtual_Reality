@@ -9,8 +9,12 @@ public class Spin : MonoBehaviour
 
     void Update()
     {
+        /*
+         * Rotazione dell'oggetto
+         * 
+         */
+        
         transform.Rotate(0, speed * Time.deltaTime, 0);
-        //transform.Translate(0, speed, 0);
     }
 
     private void OnEnable()

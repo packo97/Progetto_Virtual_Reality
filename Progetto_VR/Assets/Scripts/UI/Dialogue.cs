@@ -27,6 +27,14 @@ public class Dialogue : MonoBehaviour
     
     public void LoadDialogue(int indexDialogue)
     {
+        /*
+         * Carico il file contentente il diaologo.
+         *
+         * Ogni file deve avere la seguente struttura
+         * <ChiParla>\t<CosaDice>\n
+         * 
+         */
+        
         indexSentence = 0;
         string text = dialogue_text_asset[indexDialogue].text;
         string[] lines = text.Split('\n');
@@ -52,10 +60,6 @@ public class Dialogue : MonoBehaviour
 
     public void UpdateCurrentIndex()
     {
-        /*
-        if (indexSentence < dialogue.Count - 1)
-            indexSentence++;
-        */
         indexSentence = (indexSentence + 1) % dialogue.Count;
     }
 

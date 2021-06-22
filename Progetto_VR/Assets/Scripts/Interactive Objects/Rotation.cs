@@ -8,20 +8,14 @@ public class Rotation : MonoBehaviour
     [System.Serializable] public enum Method {clockwise=0, counterClockwise};
     public Method mod;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public IEnumerator ObjectRotation()
     {
+        /*
+         * Rotazione piattaforma in senso orario o antiorario
+         * 
+         */
+        
         if (mod == Method.clockwise)
         {
             for (int i = 1; i <= rangeRotation; i++)

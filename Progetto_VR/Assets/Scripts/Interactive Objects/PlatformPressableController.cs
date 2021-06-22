@@ -17,6 +17,13 @@ public class PlatformPressableController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
+         * Verifico quante pedane sono attive.
+         * Se sono tutte attive -> apro la porta
+         * altrimenti -> chiudo la porta
+         * 
+         */
+        
         int countPlat = 0;
         foreach (PlatformPressable plat in platforms)
         {
@@ -35,6 +42,11 @@ public class PlatformPressableController : MonoBehaviour
 
     public void ResetAll()
     {
+        /*
+         * Reset di tutte le piattaforme
+         * 
+         */
+        
         foreach (PlatformPressable plat in platforms)
         {
             plat.Reset();

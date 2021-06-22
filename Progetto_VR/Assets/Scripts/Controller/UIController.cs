@@ -142,7 +142,7 @@ public class UIController : MonoBehaviour
     private void OpenChatPanel(CrateController.Contenuto contenuto ,string testo)
     {
         /*
-         * A
+         * Apro il chat panel e inserisco il testo passato da parametro
          */
         
         _chatPanel.Open();
@@ -168,17 +168,33 @@ public class UIController : MonoBehaviour
 
     private void CloseChatPanel()
     {
+        
+        /*
+         * Chiudo il pannello
+         * 
+         */
+        
         _chatPanel.Close();
         _chatPanel.ChangeText("");
     }
 
     private void OpenGameOverPanel()
     {
+        /*
+         * Visualiazzo pannello GAMEOVER
+         * 
+         */
+        
         _gameOver.SetActive(true);
     }
 
     private void NextSentence((string, string) sentence)
     {
+        /*
+         *  Mando avanti le frasi del dialogo
+         * 
+         */
+        
         _chatPanel.Open();
         _chatPanel.NextSentence(sentence);
     }

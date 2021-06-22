@@ -27,18 +27,30 @@ public class DeviceCircuit : MonoBehaviour
 
     public void AddActivePipe()
     {
+        /*
+         * Attivo tubo e aggiorno il contatore
+         */
+        
         countActive++;
         TryActiveDevice();
     }
 
     public void RemoveActivePipe()
     {
+        /*
+         * Disattivo tubo e aggiorno il contatore
+         */
         countActive--;
         TryActiveDevice();
     }
 
     public void TryActiveDevice()
     {
+        /*
+         * Verifica a seconda della condizione se attivare o meno il Device
+         * 
+         */
+        
         if (typeOfDevice == TypeOfDevice.AND)
         {
             if (countActive == _wireCircuitsIN.Length)
@@ -95,6 +107,11 @@ public class DeviceCircuit : MonoBehaviour
 
     private void TurnOnDevice()
     {
+        /*
+         * Attiva il device e il relativo tubo di output
+         * 
+         */
+        
         GetComponentInChildren<ParticleSystemRenderer>().material = deviceMaterialOn;
         GetComponentInChildren<Light>().color = deviceMaterialOn.GetColor("_TintColor");
 
@@ -104,17 +121,18 @@ public class DeviceCircuit : MonoBehaviour
 
     public void TurnOffDevice()
     {
+        /*
+         * Disattiva il device e il relativo tubo di output
+         * 
+         */
+        
         GetComponentInChildren<ParticleSystemRenderer>().material = deviceMaterialOff;
         GetComponentInChildren<Light>().color = deviceMaterialOff.GetColor("_TintColor");
 
         foreach (WireCircuit wireCircuit in _wireCircuitsOUT)
             wireCircuit.TurnOffWire();
     }
-    // Update is called once per frame
-    void Update()
-    {
-    
-    }
+
     
 
 }

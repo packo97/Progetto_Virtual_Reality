@@ -25,17 +25,14 @@ public class PlatformPressable : MonoBehaviour
         collider = GetComponent<BoxCollider>();
         controller = GetComponentInParent<PlatformPressableController>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
-
+    
     private void OnTriggerEnter(Collider other)
     {
+        /*
+         * Quando la pedana è premuta, la attivo
+         * 
+         */
+        
         Material[] materials = _meshRenderer.materials;
         if (!isInvisible)
         {
@@ -65,6 +62,11 @@ public class PlatformPressable : MonoBehaviour
 
     private IEnumerator InvisibleTime()
     {
+        /*
+         *  Disattivo il collider della pedana per un certo periodo di tempo
+         * 
+         */
+        
         isInvisible = true;
         collider.isTrigger = true;
         //_meshRenderer.enabled = false;
@@ -78,6 +80,10 @@ public class PlatformPressable : MonoBehaviour
 
     public void Reset()
     {
+        /*
+         * Reset dello stato della pedana
+         */
+        
         Material[] materials = _meshRenderer.materials;  
         materials[0] = pressedMaterialDefault;
         _meshRenderer.materials = materials;

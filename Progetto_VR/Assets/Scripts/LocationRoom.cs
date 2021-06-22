@@ -23,6 +23,11 @@ public class LocationRoom : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        /*
+         *  Imposto la stanza in cui si trova il Player
+         * 
+         */
+        
         if (other.tag=="Player")
         {
             other.GetComponent<PlayerController>().SetRoom((int)room);

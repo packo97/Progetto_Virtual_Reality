@@ -7,20 +7,13 @@ public class PlateForWireCircuit : MonoBehaviour
 {
     [SerializeField] private WireCircuit _wireCircuit;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
+        /*
+         * Attiva tubo quando la plate viene triggerata
+         * 
+         */
+        
         if (!_wireCircuit.active)
             _wireCircuit.TurnOnWire();
         else

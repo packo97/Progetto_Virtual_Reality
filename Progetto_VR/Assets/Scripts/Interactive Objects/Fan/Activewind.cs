@@ -10,6 +10,12 @@ public class Activewind : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        /*
+         * Attiva/Disattiva lo script WindForce presente sui ventoloni
+         * 
+         */
+        
+        
         if (ToEnable != null)
             for (int i = 0; i < ToEnable.Length; i++)
             {

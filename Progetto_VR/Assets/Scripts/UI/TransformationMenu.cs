@@ -55,6 +55,11 @@ public class TransformationMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
+         * In base alla posizione del mouse seleziono la trasformazione da applicare se disponibile
+         *  
+         */
+        
         
         /* calcolo la differenza tra la posizione del mouse e il centro dello schermo */
         Vector2 mouseDelta = Input.mousePosition - centerOfTheScreen;

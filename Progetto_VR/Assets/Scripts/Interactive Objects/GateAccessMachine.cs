@@ -33,12 +33,7 @@ public class GateAccessMachine : MonoBehaviour
         cifreInserite = 0;
         _meshRenderer = GetComponent<MeshRenderer>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     public void AccessMachine()
     {

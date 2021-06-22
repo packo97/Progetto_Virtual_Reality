@@ -47,7 +47,7 @@ public class InteractionWithObject : MonoBehaviour
                 }
                 else
                 {
-                    //Debug.Log(hitCollider.name);
+                   
                     if (hitCollider.gameObject.GetComponent<Interactable>() != null)
                     {
                         interactable_object = hitCollider.gameObject;
@@ -62,37 +62,30 @@ public class InteractionWithObject : MonoBehaviour
                         if (!isTaken && isInFrontOfMe)
                         {
                             isTaken = true;
-                            //Debug.Log(transform.TransformPoint(-0.2f, 1.7f, 0.4f));
-                            // le due righe seguenti vanno fixate
+                         
                             Quaternion lookRotation = Quaternion.Euler(transform.eulerAngles);
                             Vector3 lookDirection = lookRotation * Vector3.forward;
                             if (Vector3.Dot(Vector3.forward, lookDirection) > 0.5)
                             {
-                                Debug.Log("asse z");
                                 interactable_object.transform.position = transform.TransformPoint(-0.2f, 1.7f, 0.4f);
                                 interactable_object.transform.eulerAngles = new Vector3(0,0,-160);
                             }
                             else if (Vector3.Dot(Vector3.back, lookDirection) > 0.5)
                             {
-                                Debug.Log("asse -z");
                                 interactable_object.transform.position = transform.TransformPoint(-0.2f, 1.7f, 0.4f);
                                 interactable_object.transform.eulerAngles = new Vector3(0,0,160);
                             }
                             else if (Vector3.Dot(Vector3.right, lookDirection) > 0.5)
                             {
-                                Debug.Log("asse x");
                                 interactable_object.transform.position = transform.TransformPoint(-0.2f, 1.7f, 0.4f);
                                 interactable_object.transform.eulerAngles = new Vector3(-160,0,0);
                             }
                             else if (Vector3.Dot(Vector3.left, lookDirection) > 0.5)
                             {
-                                Debug.Log("asse -x");
                                 interactable_object.transform.position = transform.TransformPoint(-0.2f, 1.7f, 0.4f);
                                 interactable_object.transform.eulerAngles = new Vector3(160,0,0);
                             }
-                            
-                            //interactable_object.transform.Rotate(0,0,-160);
-                            
+
                             interactable_object.AddComponent<FixedJoint>();
                             interactable_object.GetComponent<FixedJoint>().connectedBody = gameObject.GetComponent<Rigidbody>();
                             
@@ -166,7 +159,6 @@ public class InteractionWithObject : MonoBehaviour
                     
                     if (isInFrontOfMe)
                         gateAccessMachine.AccessMachine();
-                    //isEnteringCode = true;
                 }
                 
                 /*
@@ -252,7 +244,11 @@ public class InteractionWithObject : MonoBehaviour
     
     private IEnumerator ElectricalTime()
     {
-        Debug.Log("numero chiamate");
+        /*
+         * Tempo di elettricità sul Robot
+         * 
+         */
+        
         while (electricalTime > 0)
         {
             if (!GameEvent.isPaused)

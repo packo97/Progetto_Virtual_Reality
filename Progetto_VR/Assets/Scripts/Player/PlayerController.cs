@@ -113,16 +113,16 @@ public class PlayerController : MonoBehaviour
                 UnStick();
 
         
-        
-        //ControlMaterialPhysics();
-
-        //Debug.Log(somethingIsColliding);
     }
 
     private void Move()
     {
         /*
          * Muove sulle assi  x e z considerando la rotazione attuale
+         *
+         * Imposto la velocita in base a se sono grounded o in aria.
+         * Corro se premo Left Shift
+         * 
          */
         
         float adjustedFootstepLength = footstepLength;
@@ -134,18 +134,7 @@ public class PlayerController : MonoBehaviour
         if (horInput != 0 || vertInput != 0)
         {
             _rigidbody.isKinematic = false;
-            /*
-            Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1f);
-            //soluzione per salire le scale
-            if (hit.normal.y > 0 && hit.normal.y < 1)
-            {
-                _rigidbody.useGravity = false;
-            }
-            else
-            {
-                _rigidbody.useGravity = true;
-            }*/
-            
+
             if (Input.GetKey(KeyCode.LeftShift) && !isJumping)
             {
                 currentSpeed = groundSpeed * 2;
@@ -226,15 +215,6 @@ public class PlayerController : MonoBehaviour
                 _rigidbody.isKinematic = true;
         }
         
-        //QUESTIONE SLOP SURFACE
-        /*
-        Vector3 surface_normal = groundHit.normal;
-        Debug.Log("surface: " + surface_normal);
-        Vector3 temp = Vector3.Cross(surface_normal, movement);
-        Vector3 myDirection = Vector3.Cross(temp, surface_normal);
-        myDirection *= Time.deltaTime;
-        Debug.Log("Unity: " + myDirection);
-        */
 
     }
     
@@ -262,16 +242,6 @@ public class PlayerController : MonoBehaviour
     {
         backFlipTime = true;
         Destroy(GetComponent<FixedJoint>());
-        //StartCoroutine(BackFlipTime());
-        backFlipTime = false;
-        isClimbing = false;
-        _transformation.ResetStick();
-    }
-
-    private IEnumerator BackFlipTime()
-    {
-        yield return new WaitForSecondsRealtime(3);
-        
         backFlipTime = false;
         isClimbing = false;
         _transformation.ResetStick();
@@ -300,24 +270,7 @@ public class PlayerController : MonoBehaviour
         
         return false;
     }
-    
-    protected virtual void ControlMaterialPhysics()
-    {
-        // change the physics material to very slip when not grounded
-        
-        if ((IsGrounded() && GroundAngle() >= slopeLimit + 1) || _rigidbody.velocity == Vector3.zero )
-            _capsuleCollider.material = maxFrictionPhysics;
-        else if (IsGrounded() && _rigidbody.velocity != Vector3.zero)
-            _capsuleCollider.material = frictionPhysics;
-        else
-            _capsuleCollider.material = airFrictionPhysics;
-    }
-    public virtual float GroundAngle()
-    {
-        var groundAngle = Vector3.Angle(groundHit.normal, Vector3.up);
-        return groundAngle;
-    }
-    
+
     public void Hurt(Kill.TypeOfKill typeOfKill)
     {
         /*
@@ -356,12 +309,22 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator BackToStartScene()
     {
+        /*
+         * Ricarico la scena
+         * 
+         */
+        
         yield return new WaitForSecondsRealtime(10);
-        SceneManager.LoadScene("StartScene");
+        SceneManager.LoadScene("GameScene");
     }
 
     private IEnumerator KillTime()
     {
+        /*
+         * Periodo di morte
+         * 
+         */
+        
         yield return new WaitForSecondsRealtime(6);
         transform.position = respawnPosition;
         isDied = false;
@@ -372,7 +335,6 @@ public class PlayerController : MonoBehaviour
     private void LifeUp()
     {
         _lives += 1;
-        Debug.Log("vite: " + _lives);
     }
     
     private void OnTriggerEnter(Collider other)
@@ -444,6 +406,11 @@ public class PlayerController : MonoBehaviour
 
     public void LoadDynamicOBJ()
     {
+        /*
+         * Ricarico la stanza dove sono morto
+         * 
+         */
+        
         GameObject tmp = GameObject.FindWithTag("Room_"+Nroom);
         tmp.GetComponent<LoadObject>().ReloadRoom();
     }

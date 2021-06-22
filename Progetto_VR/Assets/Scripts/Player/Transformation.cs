@@ -116,30 +116,25 @@ public class Transformation : MonoBehaviour
             defaultMaterials[i] = new Material[7];
             defaultMaterials[i] = _skinnedMeshRenderers[i].materials;
         }
-        //defaultMaterials = _skinnedMeshRenderer.materials;
+      
     }
 
     // Update is called once per frame
     void Update()
     {
         /*
-        if (Input.GetKeyDown(transformInput))
-        {
-            transf=(TypeOfTransformation)(((int)transf+1)%6);
-            ChangeMaterial();
-            particelle.Play();
-            _electricBehavior.Reset();
-            _rigidbody.isKinematic = false;
-            isStickTime = false;
-            GetComponent<PlayerController>().SetClimbing(false, Vector3.zero);
-            if(transf != TypeOfTransformation.Colla)
-                Messenger.Broadcast(GameEvent.OFF_STICK_TIME);
-        }
-        */
+         * Aggiorno il punto di caduta
+         * 
+         */
         
         if (transform.position.y > _fallPoint)
             _fallPoint = transform.position.y;
 
+        /*
+         * Controllo se devo attivare il menu delle trasformazioni
+         * 
+         */
+        
         if (Input.GetMouseButton(1) && DoublePlayerController.playerActive == DoublePlayerController.PlayerActive.Janus)
         {
             Messenger.Broadcast(GameEvent.OPEN_MENU_TRANSFORMATION);
@@ -154,7 +149,6 @@ public class Transformation : MonoBehaviour
          * 
          */
         
-        //Material[] materials = meshRenderer.materials;
 
         Material[][] materials = new Material[4][];
         for (int i = 0; i < _skinnedMeshRenderers.Length; i++)
@@ -187,7 +181,6 @@ public class Transformation : MonoBehaviour
         }
         else if (transf == TypeOfTransformation.Default)
         {
-            //materials = defaultMaterials;
             temp = defaultMaterials[0][0];
         }
         
@@ -204,12 +197,7 @@ public class Transformation : MonoBehaviour
             }
             _skinnedMeshRenderers[i].materials = materials[i];
         }
-                
-        //Debug.Log("cambia material");
 
-        //materials[0] = temp;
-        //meshRenderer.materials = materials;
-        
         particelle.startColor = temp.color;
     }
     
@@ -252,7 +240,7 @@ public class Transformation : MonoBehaviour
             if (collision.gameObject.tag.Equals("Water"))
             {
                 /*
-                * Se sono di ghiaccio e tocco l'acqua, istanzio un plabe di ghiaccio sotto i piedi del player
+                * Se sono di ghiaccio e tocco l'acqua, istanzio un plate di ghiaccio sotto i piedi del player
                 * e faccio partire una coroutine che gestisce il tempo di vita del ghiaccio
                 */
                 
@@ -281,6 +269,13 @@ public class Transformation : MonoBehaviour
                 
         }
         
+        /*
+         * Se sono di colla, posso attaccarmi a qualsiasi oggetto se effettuo una collisione dalle ginocchia in su
+         * In particolare se mi attacco ad un Pillar, a quest'ultimo viene applicata una forza costante.
+         * Faccio partire uno sticktime della durata di 8 secondi.
+         * 
+         */
+        
         if (transf == TypeOfTransformation.Colla)
         {
             float knees = transform.position.y + GetComponent<CapsuleCollider>().height / 2;
@@ -295,11 +290,10 @@ public class Transformation : MonoBehaviour
                     collisionAboveKnees = true;
             }
             
-            //Debug.Log(normal_y);
+            
             if (horizontalCollision && collisionAboveKnees)
             {
-                //transform.SetParent(collision.collider.transform,true);
-                
+
                 if (gameObject.GetComponent<FixedJoint>() == null)
                     gameObject.AddComponent<FixedJoint>();
                 GetComponent<FixedJoint>().connectedBody = collision.rigidbody;
@@ -310,17 +304,10 @@ public class Transformation : MonoBehaviour
                     pillarMovement.AddConstantForce();
                 }
                 
-                //Debug.Log(collision.collider.GetComponent<Transform>().parent.GetComponentInChildren<PillarMovement>());
-                //collision.collider.GetComponent<Transform>().parent.GetComponentInChildren<PillarMovement>().forceMovement = 200;
-                    
-                //Debug.Log("collisione con muro");
                 GetComponent<PlayerController>().SetClimbing(true, collision.contacts[0].normal);
-                //_rigidbody.isKinematic = true;
-                //_rigidbody.detectCollisions = true;
-                
+             
                if (!isStickTime)
                {
-                   //Debug.Log("parte il collatima");
                    isStickTime = true;
                    Messenger<float>.Broadcast(GameEvent.ON_STICK_TIME, stickTime);
                    StartCoroutine(StickTime(collision));
@@ -340,21 +327,22 @@ public class Transformation : MonoBehaviour
          *  o terreno viene salvato il punto di stacco e la booleana di stacco viene settata a true.
          *
          */
-        
-        if (transf == TypeOfTransformation.Colla)
-        {
-            //transform.parent = null;
-            //GetComponent<FixedJoint>().connectedBody = null;
-        }
+
         if ( _isGrounded && (transf == TypeOfTransformation.Gomma))
         {
             _jumpPoint = transform.position.y;
             _isGrounded = false;
-            //Debug.Log(_jumpPoint);
         }
     }
+    
     private IEnumerator StickTime(Collision collision)
     {
+        /*
+         * Tempo in cui posso rimanere appicicato.
+         * Alla fine distruggo il Joint per staccarmi e ripristino la trasformazione a Default
+         * 
+         */
+        
         while (stickTime > 0)
         {
             if (!GameEvent.isPaused)

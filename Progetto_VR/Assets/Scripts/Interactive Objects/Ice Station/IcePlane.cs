@@ -6,18 +6,7 @@ using UnityEngine;
 public class IcePlane : MonoBehaviour
 {
     private IceStationChild iceStationChild;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     public IEnumerator IceTime()
     {

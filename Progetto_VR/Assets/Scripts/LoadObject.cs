@@ -21,7 +21,6 @@ public class LoadObject : MonoBehaviour
     private void OnEnable()
     {
         PlaceOBJ();
-        
     }
    
 
@@ -34,6 +33,11 @@ public class LoadObject : MonoBehaviour
 
     private void PlaceOBJ()
     {
+        /*
+         * Istanzio l'oggetto impostato nella corretta posizione
+         * 
+         */
+        
         _obj = Instantiate(obj) as GameObject;
         if (room == Room.Room_3)
         {

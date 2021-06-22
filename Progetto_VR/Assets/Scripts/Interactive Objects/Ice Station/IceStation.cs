@@ -24,6 +24,12 @@ public class IceStation : MonoBehaviour
 
     private bool IsStationActive()
     {
+        /*
+         * Controllo se la stazione deve essere attivata.
+         * Se va attivata, attivo il raggio elettrico
+         * 
+         */
+        
         if (frozenStation)
             return true;
         

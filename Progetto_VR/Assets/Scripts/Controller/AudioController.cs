@@ -20,6 +20,7 @@ public class AudioController : MonoBehaviour
     AudioClip musicClip;
     bool effectPaused=false;
     bool musicPaused=true;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -29,13 +30,14 @@ public class AudioController : MonoBehaviour
         PlayMusic();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SoundMute(){
+    
+        /*
+         *  attivo/disattivo gli effetti sonori.
+         *  cambio in accordo l'immagine visualizzata.
+         * 
+         */
+        
         if(effectPaused)
             soundButton.GetComponent<Image>().sprite=audio;
         else
@@ -45,10 +47,21 @@ public class AudioController : MonoBehaviour
     }
 
     public void SoundVolume(float volume){
+        
+        /*
+         * Regolo il volume degli effetti sonori
+         */
+        
         AudioListener.volume=volume;
     }
 
     public void PlayMusic(){
+        
+        /*
+         *  attivo/disattivo la musica.
+         *  cambio in accordo l'immagine visualizzata.
+         * 
+         */
         
         musicsource.clip=musicClip;
         if(musicPaused){
@@ -64,6 +77,11 @@ public class AudioController : MonoBehaviour
     }
 
     public void MusicVolume(float volume){
-        musicsource.volume=volume/2;
+        
+        /*
+         *   Regolo il volume della musica
+         */
+        
+        musicsource.volume=volume;
     }
 }

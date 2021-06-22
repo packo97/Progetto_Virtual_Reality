@@ -48,11 +48,7 @@ public class AnimatorController : MonoBehaviour
         bool isBackFlipTime = _playerController.backFlipTime;
         _animator.SetBool("BackFlipTime", isBackFlipTime);
         //Debug.Log(_animator.GetCurrentAnimatorStateInfo(0).IsName("Happy Idle"));
-
-        /*
-         bool isEnteringCode = _interactionWithObject.isEnteringCode;
-        _animator.SetBool("EnteringCode", isEnteringCode);
-        */
+        
 
         bool isTaken = _interactionWithObject.isTaken;
         _animator.SetBool("IsTaken", isTaken);

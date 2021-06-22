@@ -16,15 +16,14 @@ public class WireCircuit : MonoBehaviour
         _meshRenderers = GetComponentsInChildren<MeshRenderer>();
         active = false;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void TurnOnWire()
     {
+        /*
+         * Attiva tubo
+         * 
+         */
+        
         active = true;
 
         foreach (MeshRenderer meshRenderer in _meshRenderers)
@@ -42,6 +41,11 @@ public class WireCircuit : MonoBehaviour
 
     public void TurnOffWire()
     {
+        /*
+         * Disattiva tubo
+         * 
+         */
+        
         active = false;
 
         

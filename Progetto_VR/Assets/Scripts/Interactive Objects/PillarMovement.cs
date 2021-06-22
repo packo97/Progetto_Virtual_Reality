@@ -26,12 +26,7 @@ public class PillarMovement : MonoBehaviour
         isMoving = false;
         _constantForce = GetComponent<ConstantForce>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     public void Movement()
     {
@@ -47,6 +42,13 @@ public class PillarMovement : MonoBehaviour
 
     IEnumerator ForceMovement()
     {
+        /*
+         * Applico una forza al pillar nella direzione impostata finchè esso non raggiunge il target
+         * 
+         * 
+         */
+        
+        
         isMoving = true;
         
 
@@ -96,6 +98,11 @@ public class PillarMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        /*
+         * Verifico la collisione e inverto i target
+         * 
+         */
+        
         if (other.collider.name.Equals("start"))
         {
             isMoving = false;
@@ -118,6 +125,12 @@ public class PillarMovement : MonoBehaviour
 
     public void AddConstantForce()
     {
+        /*
+         * Aggiungo una forza costante per permettere al pillar di muoversi anche quando
+         * il robot è attaccato ad esso
+         * 
+         */
+        
         _constantForce.enabled = true;
         if (target == "end")
         {
