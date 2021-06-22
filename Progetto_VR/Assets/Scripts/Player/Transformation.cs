@@ -101,7 +101,7 @@ public class Transformation : MonoBehaviour
 
         _electricBehavior = GetComponentInChildren<ElectricBehavior>(true);
         _rigidbody = GetComponent<Rigidbody>();
-        _jumpLimit = 90f;
+        _jumpLimit = 120f;
         _isGrounded = true;
         
 
@@ -233,9 +233,9 @@ public class Transformation : MonoBehaviour
             else 
                 GetComponent<AudioSource>().PlayOneShot(gommaSound);
 
-            Vector3 vec = new Vector3(0, 15 * _distance, 0);
+            Vector3 vec = new Vector3(0, 20 * _distance, 0);
             
-            if (_distance * 15 > _jumpLimit)
+            if (_distance * 20 > _jumpLimit)
                 vec.y = _jumpLimit;
             
             _rigidbody.AddForce(vec, ForceMode.Impulse);

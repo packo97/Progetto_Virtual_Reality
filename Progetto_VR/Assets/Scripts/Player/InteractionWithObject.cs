@@ -260,7 +260,7 @@ public class InteractionWithObject : MonoBehaviour
                 electricalTime -= 1;
                 Messenger.Broadcast(GameEvent.DECREASE_STICK_TIME);
             }
-            yield return new WaitForSecondsRealtime(0.1f);
+            yield return new WaitForSeconds(0.1f);
         }
         
         ElectricBehavior electricityOnPlayer = GetComponentInChildren<ElectricBehavior>(true);

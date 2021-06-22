@@ -53,12 +53,12 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _pauseMenu.Close();
         _settingsMenu.Close();
         _stickTimeSlider.gameObject.SetActive(false);
         _transformationMenu.Close();
         _chatPanel.Close();
         _gameOver.SetActive(false);
+        _pauseMenu.Open();
     }
 
     // Update is called once per frame

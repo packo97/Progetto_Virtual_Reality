@@ -1,4 +1,28 @@
+# Starting compiling UnityEngine.TestRunner.dll
+/home/pasquale/2020.3.1f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-3fabed22174fba459b29c98f9c286522
+# Starting compiling UnityEngine.UI.dll
+/home/pasquale/2020.3.1f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-25da885fee7cb8efc998c92eccf1a447
+# Starting compiling Unity.Timeline.dll
+/home/pasquale/2020.3.1f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-11851244036a08644a03fe7f2789d84e
+# Starting compiling Unity.TextMeshPro.dll
+/home/pasquale/2020.3.1f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-225b22aa07730d9eeb4503762ee16ffe
+# Starting compiling Unity.ProBuilder.Csg.dll
+/home/pasquale/2020.3.1f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-b9d22c0544bf1c8368bc7bddcdfd9e28
+# Starting compiling Unity.ProBuilder.Poly2Tri.dll
+/home/pasquale/2020.3.1f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-fe49603c01c4a24f8a242a79ff8797b5
+# Starting compiling Unity.ProBuilder.KdTree.dll
+/home/pasquale/2020.3.1f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-39e3f2caacda3ca08bb13ff89f43ddf1
+# Starting compiling Unity.Postprocessing.Runtime.dll
+/home/pasquale/2020.3.1f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-73a43daca53096dd49be65acb147adc3
+# Starting compiling Unity.ProBuilder.Stl.dll
+/home/pasquale/2020.3.1f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-543080c6d4eaee9ffa6ff948b403a0b6
+# Starting compiling Unity.ProBuilder.dll
+/home/pasquale/2020.3.1f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-44404374926542bccade370b18b11ca8
+# Starting compiling Unity.ProGrids.dll
+/home/pasquale/2020.3.1f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-9b8303d682ebc44808d3d7bad7622e92
+# Starting compiling Cinemachine.dll
+/home/pasquale/2020.3.1f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-8062bf5c16d77a42885d4766536cd9e5
+# Starting compiling Unity.Recorder.dll
+/home/pasquale/2020.3.1f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-8806a4245d1591d5ba1170d9050cb1d2
 # Starting compiling Assembly-CSharp.dll
-/home/pasquale/2020.3.1f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-9467ef1e727d5e35f876cedc5730e8a6
-# Starting compiling Assembly-CSharp-Editor.dll
-/home/pasquale/2020.3.1f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-35c70d87180c1f50fad0d8ba0462201b
+/home/pasquale/2020.3.1f1/Editor/Data/Tools/RoslynScripts/unity_csc.sh /noconfig @Temp/UnityTempFile-b5ba44c3ff2c44ba5b41b6e08ac418df

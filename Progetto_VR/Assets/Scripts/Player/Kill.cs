@@ -62,9 +62,10 @@ public class Kill : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
-        if (other.gameObject.tag.Equals("Player") && (other.gameObject.GetComponent<Transformation>().transf != Transformation.TypeOfTransformation.Gomma && other.gameObject.GetComponent<Transformation>().transf != Transformation.TypeOfTransformation.Rame))
-        {
-            playerController.Hurt(TypeOfKill.Electricity);
-        }
+        if (playerController != null)
+            if (other.gameObject.tag.Equals("Player") && (other.gameObject.GetComponent<Transformation>().transf != Transformation.TypeOfTransformation.Gomma && other.gameObject.GetComponent<Transformation>().transf != Transformation.TypeOfTransformation.Rame))
+            {
+                playerController.Hurt(TypeOfKill.Electricity);
+            }
     }
 }

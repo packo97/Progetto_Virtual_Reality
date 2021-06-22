@@ -4,4 +4,5 @@ Janus	Io sono Janus e sto per uscire da questo laboratorio
 Janus	grazie alle mie trasformazioni
 Friend	Le tue trasformazioni non saranno sufficienti per arrivare all'uscita.
 Friend	E' il momento di unire le forze!
+Friend	Premi TAB per utilizzarmi.
 End	End

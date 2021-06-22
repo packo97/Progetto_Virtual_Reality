@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,18 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private SettingsMenu _settingsMenu;
+
+    private AudioSource _audioSource;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
+
     void Start()
     {
+        
         _settingsMenu.Close();
     }
 
@@ -36,6 +46,7 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Time.timeScale = 0f;
+        _audioSource.Play();
     }
 
     public void OpenSettings()
@@ -60,6 +71,8 @@ public class PauseMenu : MonoBehaviour
 
     public void Exit()
     {
-        SceneManager.LoadScene("StartScene");
+        _audioSource.Play();
+        Application.Quit();
+        //UnityEditor.EditorApplication.isPlaying = false;
     }
 }

@@ -77,12 +77,12 @@ public class PlayerController : MonoBehaviour
         /*
          * Per evitare problemi con frame alti
          */
-        /*
-        #if UNITY_EDITOR
+        
+        //#if UNITY_EDITOR
         QualitySettings.vSyncCount = 0;  // VSync must be disabled
         Application.targetFrameRate = 60;
-        #endif
-        */
+        //#endif
+        
 
 
         step = true;
@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isClimbing && !isDied)
+        if (!isClimbing && !isDied && !GameEvent.isPaused)
             Move();
 
         if (!IsGrounded())
@@ -201,6 +201,7 @@ public class PlayerController : MonoBehaviour
             //la seguente riga non funziona benissimo con le collisioni
             //_rigidbody.MovePosition(transform.position + movement);
             
+            Debug.Log(forceMovement);
             _rigidbody.AddForce(forceMovement, ForceMode.VelocityChange);
             
             if(step && !isJumping){
@@ -349,7 +350,7 @@ public class PlayerController : MonoBehaviour
                 Messenger.Broadcast(GameEvent.GAME_OVER);
                 StartCoroutine(BackToStartScene());
             }
-            
+            GetComponent<AudioSource>().PlayOneShot(hurtSound);
         }
     }
 

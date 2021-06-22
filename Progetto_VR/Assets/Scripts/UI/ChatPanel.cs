@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,10 +13,11 @@ public class ChatPanel : MonoBehaviour
     [SerializeField] private Sprite scientist2Sprite;
     [SerializeField] private Sprite scientist3Sprite;
 
-
+    private AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -42,7 +42,7 @@ public class ChatPanel : MonoBehaviour
          * A seconda dell'input testuale che arriva, modifico il testo del pannello.
          * 
          */
-        
+        image.sprite = janusSprite;
         if (text.Equals("vuota"))
             testo.text = "Peccato! La cassa è vuota...";
         else if (text.Equals("vita"))
@@ -59,6 +59,8 @@ public class ChatPanel : MonoBehaviour
             testo.text = "Un chip per diventare di carta? Potrei utilizzarlo per volare...";
         else
             testo.text = "Interessante... Un codice... " + text;
+
+        
 
     }
 
@@ -89,6 +91,8 @@ public class ChatPanel : MonoBehaviour
 
             testo.text = sentence.Item2;
         }
+        
+        audio.Play();
     }
 
 }

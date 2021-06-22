@@ -1329,6 +1329,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2205938234529500182, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 84af79a86bafd5ea8a7745f067e11ff2, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
 --- !u!4 &79331998216422458 stripped
@@ -1852,6 +1856,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2205938234529500182, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 84af79a86bafd5ea8a7745f067e11ff2, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
 --- !u!1 &5103256589847282167 stripped
@@ -2523,6 +2531,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2205938234529500182, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 84af79a86bafd5ea8a7745f067e11ff2, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
 --- !u!4 &5744701053728671699 stripped
@@ -2550,6 +2562,10 @@ PrefabInstance:
       propertyPath: Loop
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3648929906360833477, guid: 623a94a8efb2adc44911bc2bded7a566, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 84af79a86bafd5ea8a7745f067e11ff2, type: 3}
     - target: {fileID: 5217893554082261503, guid: 623a94a8efb2adc44911bc2bded7a566, type: 3}
       propertyPath: m_RootOrder
       value: 0

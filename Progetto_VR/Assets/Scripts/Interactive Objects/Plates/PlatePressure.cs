@@ -44,7 +44,6 @@ public class PlatePressure : MonoBehaviour
     //cambiamo il colore alla piattaforma da rosso a verde e chiama lo scritp
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("on trigger enter con " + other.name);
         if (pressure == false && other.GetType() != typeof(SphereCollider))
         {
             pressure = true;
@@ -60,7 +59,6 @@ public class PlatePressure : MonoBehaviour
     //cambiamo il colore alla piattaforma da rosso a verde e chiama lo scritp
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("bye");
         if (pressure == true && other.GetType() != typeof(SphereCollider) && !stayopen)
         {
             pressure = false;

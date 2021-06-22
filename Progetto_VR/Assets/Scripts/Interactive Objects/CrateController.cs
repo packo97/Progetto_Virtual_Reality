@@ -21,7 +21,9 @@ public class CrateController : MonoBehaviour
 
     [SerializeField] private GameObject chip;
     
-    
+    [SerializeField] private AudioClip life_up_clip;
+
+    private AudioSource _audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +31,7 @@ public class CrateController : MonoBehaviour
          * A seconda del contenuto della casa, rendo visibile il corrispondente oggetto.
          * 
          */
-        
+        _audioSource = GetComponent<AudioSource>();
         
         isOpen = false;
         if (contenuto == Contenuto.Vita)
@@ -62,6 +64,7 @@ public class CrateController : MonoBehaviour
         else if (contenuto == Contenuto.Vita)
         {
             messaggio = "vita";
+            _audioSource.PlayOneShot(life_up_clip);
         }
         else if (contenuto == Contenuto.Vuota)
         {
